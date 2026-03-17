@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from 'express';
 import TracksService from '../services/tracks.service.js';
 import type { ITrack } from '../types/music.types.js';
-import { Error } from 'mongoose';
+import { Error, isValidObjectId } from 'mongoose';
 
 class TrackController {
   static getAll = async (_req: Request, res: Response, next: NextFunction) => {
@@ -27,6 +27,32 @@ class TrackController {
     }
 
     return res.json(albumTracks);
+  };
+
+  static getArtistTracks = async (
+    _req: Request,
+    res: Response,
+    next: NextFunction,
+    artist_id: string,
+  ) => {
+    try {
+      const artistTracks = await TracksService.getArtistTracks(artist_id);
+
+      if (!artistTracks) {
+        return res.status(404).json({
+          error: "Artist doesn't have tracks",
+        });
+      }
+
+      return res.json(artistTracks);
+    } catch (error) {
+      if (!isValidObjectId(artist_id)) {
+        return res.status(400).json({
+          error: 'Invalid artist id',
+        });
+      }
+      next(error);
+    }
   };
 
   static create = async (req: Request, res: Response, next: NextFunction) => {

@@ -33,7 +33,7 @@ class AlbumsController {
     } catch (error) {
       if (!isValidObjectId(album_id)) {
         return res.status(400).json({
-          error: 'Invalid id',
+          error: 'Invalid album id',
         });
       }
 
