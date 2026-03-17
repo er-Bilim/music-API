@@ -1,4 +1,4 @@
-import { model, Schema } from 'mongoose';
+import { isValidObjectId, model, Schema } from 'mongoose';
 import Artist from './Artist.js';
 
 const AlbumSchema = new Schema({
@@ -9,7 +9,7 @@ const AlbumSchema = new Schema({
     validate: {
       validator:  (artist_id: string) => {
         const artist = Artist.findById(artist_id);
-        if (!artist) {
+        if (!artist && !isValidObjectId(artist_id)) {
           return false;
         }
 
@@ -27,7 +27,7 @@ const AlbumSchema = new Schema({
     required: true,
     default: Date.now,
   },
-  album_cover: {
+  image: {
     type: String,
     required: false,
     default: null,

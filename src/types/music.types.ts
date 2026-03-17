@@ -7,11 +7,10 @@ export interface IArtist {
 export interface IAlbum {
   artist_id: string;
   name: string;
-  release_year: string;
-  album_cover: string | null;
+  image: string | null;
 }
 
-export interface Track {
+export interface ITrack {
   album_id: string;
   name: string;
   time: string;
