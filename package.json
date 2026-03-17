@@ -1,24 +1,16 @@
 {
   "name": "music-api",
   "version": "1.0.0",
-  "description": "Start the server",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/er-Bilim/music-API.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
-  "bugs": {
-    "url": "https://github.com/er-Bilim/music-API/issues"
-  },
-  "homepage": "https://github.com/er-Bilim/music-API#readme",
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
