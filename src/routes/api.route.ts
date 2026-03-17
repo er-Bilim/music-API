@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import artistsRouter from './music/artists.route.js';
-import albumsRouter from './music/albums.route.js';
-import tracksRouter from './music/tracks.route.js';
+import artistsRouter from './artists.route.js';
+import albumsRouter from './albums.route.js';
+import tracksRouter from './tracks.route.js';
 
 const apiRoute = Router();
 
