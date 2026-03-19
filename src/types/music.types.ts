@@ -15,3 +15,7 @@ export interface ITrack {
   name: string;
   time: string;
 }
+
+export interface ITrackHistory {
+  track_id: string;
+}
