@@ -3,13 +3,14 @@ import cors from 'cors';
 import apiRoute from './routes/api.route.js';
 import mongoose from 'mongoose';
 import { PORT } from './constants/constants.js';
+import dotenv from 'dotenv';
 
 const app: Express = express();
 
 app.use(cors());
 app.use(express.static('public'));
 app.use(express.json());
-
+dotenv.config();
 app.use('/api', apiRoute);
 
 app.use((_req: Request, res: Response) => {
