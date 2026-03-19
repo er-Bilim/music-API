@@ -15,4 +15,11 @@ usersRouter.post(
   },
 );
 
+usersRouter.post(
+  '/sessions',
+  async (req: Request, res: Response, next: NextFunction) => {
+    await UsersController.authentication(req, res, next);
+  },
+);
+
 export default usersRouter;
