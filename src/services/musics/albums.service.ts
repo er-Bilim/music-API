@@ -1,4 +1,4 @@
-import Album from '../../model/Album.js';
+import Album from '../../model/musics/Album.js';
 import type { IAlbum } from '../../types/music.types.js';
 
 class AlbumsService {

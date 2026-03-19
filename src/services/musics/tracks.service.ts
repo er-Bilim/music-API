@@ -1,5 +1,5 @@
-import Album from '../../model/Album.js';
-import Track from '../../model/Track.js';
+import Album from '../../model/musics/Album.js';
+import Track from '../../model/musics/Track.js';
 import type { ITrack } from '../../types/music.types.js';
 
 class TracksService {
