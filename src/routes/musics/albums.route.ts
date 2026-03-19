@@ -1,0 +1,43 @@
+import {
+  Router,
+  type NextFunction,
+  type Request,
+  type Response,
+} from 'express';
+import { imagesUpload } from '../../middlewares/multer.js';
+import AlbumsController from '../../controllers/musics/albums.controller.js';
+
+const albumsRouter = Router();
+
+albumsRouter.get(
+  '/',
+  async (req: Request, res: Response, next: NextFunction) => {
+    const artist_id = req.query.artist as string;
+
+    if (artist_id) {
+      return await AlbumsController.getArtistAlbums(req, res, artist_id);
+    }
+    return await AlbumsController.getAll(req, res, next);
+  },
+);
+
+albumsRouter.get(
+  '/:album_id',
+  async (req: Request, res: Response, next: NextFunction) => {
+    const album_id = req.params.album_id as string;
+
+    if (album_id) {
+      return await AlbumsController.getById(req, res, next, album_id);
+    }
+  },
+);
+
+albumsRouter.post(
+  '/',
+  imagesUpload.single('image'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    return await AlbumsController.create(req, res, next);
+  },
+);
+
+export default albumsRouter;
