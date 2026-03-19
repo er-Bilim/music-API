@@ -1,0 +1,50 @@
+import { model, Schema, type HydratedDocument, type Model } from 'mongoose';
+import type { IUser } from '../types/user.types.js';
+import { randomUUID } from 'crypto';
+import argon2 from 'argon2';
+
+interface UserMethods {
+  checkPassword: (password: string) => Promise<boolean>;
+  generateAuthToken: () => void;
+}
+
+type UserModel = Model<IUser, {}, UserMethods>;
+
+const UserSchema = new Schema<HydratedDocument<IUser>, UserModel, UserMethods>({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  token: {
+    type: String,
+    required: true,
+  },
+});
+
+UserSchema.pre('save', async function () {
+  if (this.isModified('password')) {
+    const hash = await argon2.hash(this.password);
+    return (this.password = hash);
+  }
+
+  return;
+});
+
+UserSchema.set('toJSON', {
+  transform: (_doc, ret, _options) => {
+    const { password, __v, ...user } = ret;
+    return user;
+  },
+});
+
+UserSchema.methods.generateAuthToken = function () {
+  this.token = randomUUID();
+};
+
+const User = model('User', UserSchema);
+export default User;
