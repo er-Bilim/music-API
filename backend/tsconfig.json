@@ -40,6 +40,9 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
-    "noEmitOnError": true
+    "noEmitOnError": true,
+    "esModuleInterop": true,
+    "rewriteRelativeImportExtensions": true,
+    "allowImportingTsExtensions": true
   }
 }
