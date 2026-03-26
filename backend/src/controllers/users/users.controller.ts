@@ -44,9 +44,6 @@ const UsersController = {
       return res.json({ message: 'Authentication successful' });
     } catch (error) {
       next(error);
-      return res
-        .status(500)
-        .json({ message: 'Internal server error, sorry :(' });
     }
   },
 };

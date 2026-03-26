@@ -27,7 +27,10 @@ const UsersService = {
     return data;
   },
 
-  
+  getUserByToken: async (token: string) => {
+    const user = await User.findOne({ token });
+    return user;
+  },
 };
 
 export default UsersService;

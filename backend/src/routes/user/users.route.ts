@@ -1,25 +1,11 @@
-import {
-  Router,
-  type NextFunction,
-  type Request,
-  type Response,
-} from 'express';
+import { Router } from 'express';
 import UsersController from '../../controllers/users/users.controller.ts';
+import auth from '../../middlewares/auth.ts';
 
 const usersRouter = Router();
 
-usersRouter.post(
-  '/',
-  async (req: Request, res: Response, next: NextFunction) => {
-    await UsersController.registration(req, res, next);
-  },
-);
+usersRouter.post('/', auth, UsersController.registration);
 
-usersRouter.post(
-  '/sessions',
-  async (req: Request, res: Response, next: NextFunction) => {
-    await UsersController.authentication(req, res, next);
-  },
-);
+usersRouter.post('/sessions', auth, UsersController.authentication);
 
 export default usersRouter;
