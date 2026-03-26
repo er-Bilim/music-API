@@ -3,21 +3,17 @@ import TracksService from '../../services/musics/tracks.service.ts';
 import type { ITrack } from '../../types/music.types.ts';
 import { Error, isValidObjectId } from 'mongoose';
 
-class TrackController {
-  static getAll = async (_req: Request, res: Response, next: NextFunction) => {
+const TrackController = {
+  getAll: async (_req: Request, res: Response, next: NextFunction) => {
     try {
       const tracks = await TracksService.getAll();
       res.json(tracks);
     } catch (error) {
       next(error);
     }
-  };
+  },
 
-  static getAlbumTracks = async (
-    _req: Request,
-    res: Response,
-    album_id: string,
-  ) => {
+  getAlbumTracks: async (_req: Request, res: Response, album_id: string) => {
     const albumTracks = await TracksService.getAlbumTracks(album_id);
 
     if (albumTracks.length === 0) {
@@ -27,9 +23,9 @@ class TrackController {
     }
 
     return res.json(albumTracks);
-  };
+  },
 
-  static getArtistTracks = async (
+  getArtistTracks: async (
     _req: Request,
     res: Response,
     next: NextFunction,
@@ -53,9 +49,9 @@ class TrackController {
       }
       next(error);
     }
-  };
+  },
 
-  static create = async (req: Request, res: Response, next: NextFunction) => {
+  create: async (req: Request, res: Response, next: NextFunction) => {
     const body: ITrack = req.body;
 
     const correctTrackData: ITrack = {
@@ -76,7 +72,7 @@ class TrackController {
 
       next(error);
     }
-  };
-}
+  },
+};
 
 export default TrackController;

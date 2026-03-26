@@ -1,14 +1,14 @@
 import User from '../../model/user/User.ts';
 import type { IUser, IUserReg } from '../../types/user.types.ts';
 
-class UsersService {
-  static registration = async (data: IUserReg): Promise<IUserReg> => {
+const UsersService = {
+  registration: async (data: IUserReg): Promise<IUserReg> => {
     const user = new User(data);
     user.generateAuthToken();
     return await user.save();
-  };
+  },
 
-  static authentication = async (
+  authentication: async (
     username: string,
     password: string,
   ): Promise<{ user: IUser | null; isMatch: boolean }> => {
@@ -25,7 +25,9 @@ class UsersService {
     }
 
     return data;
-  };
-}
+  },
+
+  
+};
 
 export default UsersService;

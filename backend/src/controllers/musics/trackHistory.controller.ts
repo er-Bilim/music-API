@@ -3,8 +3,8 @@ import type { ITrackHistory } from '../../types/music.types.ts';
 import TrackHistoryService from '../../services/musics/trackHistory.service.ts';
 import { Error } from 'mongoose';
 
-class TrackHistoryController {
-  static create = async (req: Request, res: Response, next: NextFunction) => {
+const TrackHistoryController = {
+  create: async (req: Request, res: Response, next: NextFunction) => {
     const body: ITrackHistory = req.body;
     try {
       const token = req.get('Authorization');
@@ -27,7 +27,7 @@ class TrackHistoryController {
       }
       next(error);
     }
-  };
-}
+  },
+};
 
 export default TrackHistoryController;

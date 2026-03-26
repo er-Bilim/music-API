@@ -3,17 +3,17 @@ import ArtistsService from '../../services/musics/artists.service.ts';
 import type { IArtist } from '../../types/music.types.ts';
 import { Error } from 'mongoose';
 
-class ArtistController {
-  static getAll = async (_req: Request, res: Response, next: NextFunction) => {
+const ArtistController = {
+  getAll: async (_req: Request, res: Response, next: NextFunction) => {
     try {
       const artists = await ArtistsService.getAll();
       return res.json(artists);
     } catch (error) {
       return next(error);
     }
-  };
+  },
 
-  static create = async (req: Request, res: Response, next: NextFunction) => {
+  create: async (req: Request, res: Response, next: NextFunction) => {
     const body: IArtist = req.body;
 
     const correctArtistData: IArtist = {
@@ -34,7 +34,7 @@ class ArtistController {
 
       return next(error);
     }
-  };
-}
+  },
+};
 
 export default ArtistController;

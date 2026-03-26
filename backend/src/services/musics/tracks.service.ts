@@ -2,18 +2,18 @@ import Album from '../../model/musics/Album.ts';
 import Track from '../../model/musics/Track.ts';
 import type { ITrack } from '../../types/music.types.ts';
 
-class TracksService {
-  static getAll = async () => {
+const TracksService = {
+  getAll: async () => {
     const tracks = await Track.find().select('-__v');
     return tracks;
-  };
+  },
 
-  static getAlbumTracks = async (album_id: string) => {
+  getAlbumTracks: async (album_id: string) => {
     const albumTracks = await Track.find({ album_id }).select('-__v');
     return albumTracks;
-  };
+  },
 
-  static getArtistTracks = async (artist_id: string) => {
+  getArtistTracks: async (artist_id: string) => {
     const artistTracks = await Album.find({ artist_id });
 
     if (artistTracks) {
@@ -27,12 +27,12 @@ class TracksService {
       return null;
     }
     return null;
-  };
+  },
 
-  static create = async (data: ITrack) => {
+  create: async (data: ITrack) => {
     const track = new Track(data);
     return await track.save();
-  };
-}
+  },
+};
 
 export default TracksService;

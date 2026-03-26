@@ -2,8 +2,8 @@ import TrackHistory from '../../model/musics/TrackHistory.ts';
 import User from '../../model/user/User.ts';
 import type { ITrackHistory } from '../../types/music.types.ts';
 
-class TrackHistoryService {
-  static create = async (token: string, data: ITrackHistory) => {
+const TrackHistoryService = {
+  create: async (token: string, data: ITrackHistory) => {
     const user = await User.findOne({ token });
 
     if (user) {
@@ -15,7 +15,7 @@ class TrackHistoryService {
     }
 
     return null;
-  };
-}
+  },
+};
 
 export default TrackHistoryService;

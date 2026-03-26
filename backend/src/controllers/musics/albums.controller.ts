@@ -4,17 +4,17 @@ import type { IAlbum } from '../../types/music.types.ts';
 import deleteImage from '../../utils/deleteImage.ts';
 import { Error, isValidObjectId } from 'mongoose';
 
-class AlbumsController {
-  static getAll = async (_req: Request, res: Response, next: NextFunction) => {
+const AlbumsController =  {
+  getAll: async (_req: Request, res: Response, next: NextFunction) => {
     try {
       const albums = await AlbumsService.getAll();
       return res.json(albums);
     } catch (error) {
       next(error);
     }
-  };
+  },
 
-  static getById = async (
+  getById: async (
     _req: Request,
     res: Response,
     next: NextFunction,
@@ -39,9 +39,9 @@ class AlbumsController {
 
       return next(error);
     }
-  };
+  },
 
-  static getArtistAlbums = async (
+  getArtistAlbums: async (
     _req: Request,
     res: Response,
     artist_id: string,
@@ -55,9 +55,9 @@ class AlbumsController {
     }
 
     return res.json(artistAlbums);
-  };
+  },
 
-  static create = async (req: Request, res: Response, next: NextFunction) => {
+  create:  async (req: Request, res: Response, next: NextFunction) => {
     const body: IAlbum = req.body;
 
     const correctAlbumData: IAlbum = {
@@ -79,7 +79,7 @@ class AlbumsController {
 
       next(error);
     }
-  };
+  },
 }
 
 export default AlbumsController;

@@ -3,12 +3,8 @@ import type { IUserReg } from '../../types/user.types.ts';
 import { Error } from 'mongoose';
 import UsersService from '../../services/users/users.service.ts';
 
-class UsersController {
-  static registration = async (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) => {
+const UsersController = {
+  registration: async (req: Request, res: Response, next: NextFunction) => {
     const body: IUserReg = req.body;
 
     const correctUserData: IUserReg = {
@@ -26,13 +22,9 @@ class UsersController {
 
       next(error);
     }
-  };
+  },
 
-  static authentication = async (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) => {
+  authentication: async (req: Request, res: Response, next: NextFunction) => {
     const { username, password } = req.body;
 
     try {
@@ -56,7 +48,7 @@ class UsersController {
         .status(500)
         .json({ message: 'Internal server error, sorry :(' });
     }
-  };
-}
+  },
+};
 
 export default UsersController;
