@@ -7,7 +7,7 @@ const AlbumSchema = new Schema({
     ref: 'Artist',
     required: true,
     validate: {
-      validator:  (artist_id: string) => {
+      validator: (artist_id: string) => {
         const artist = Artist.findById(artist_id);
         if (!artist && !isValidObjectId(artist_id)) {
           return false;
