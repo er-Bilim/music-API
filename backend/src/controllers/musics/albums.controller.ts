@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from 'express';
-import AlbumsService from '../../services/musics/albums.service.js';
-import type { IAlbum } from '../../types/music.types.js';
-import deleteImage from '../../utils/deleteImage.js';
+import AlbumsService from '../../services/musics/albums.service.ts';
+import type { IAlbum } from '../../types/music.types.ts';
+import deleteImage from '../../utils/deleteImage.ts';
 import { Error, isValidObjectId } from 'mongoose';
 
 class AlbumsController {

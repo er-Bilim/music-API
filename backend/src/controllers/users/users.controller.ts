@@ -1,8 +1,7 @@
 import type { NextFunction, Request, Response } from 'express';
-import type { IUserReg } from '../../types/user.types.js';
+import type { IUserReg } from '../../types/user.types.ts';
 import { Error } from 'mongoose';
-import UsersService from '../../services/users/users.service.js';
-import argon2d from 'argon2';
+import UsersService from '../../services/users/users.service.ts';
 
 class UsersController {
   static registration = async (

@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import Track from './Track.js';
+import Track from './Track.ts';
 
 const TrackHistorySchema = new Schema({
   user_id: {

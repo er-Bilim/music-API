@@ -1,6 +1,6 @@
-import TrackHistory from '../../model/musics/TrackHistory.js';
-import User from '../../model/user/User.js';
-import type { ITrackHistory } from '../../types/music.types.js';
+import TrackHistory from '../../model/musics/TrackHistory.ts';
+import User from '../../model/user/User.ts';
+import type { ITrackHistory } from '../../types/music.types.ts';
 
 class TrackHistoryService {
   static create = async (token: string, data: ITrackHistory) => {

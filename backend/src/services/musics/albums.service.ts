@@ -1,5 +1,5 @@
-import Album from '../../model/musics/Album.js';
-import type { IAlbum } from '../../types/music.types.js';
+import Album from '../../model/musics/Album.ts';
+import type { IAlbum } from '../../types/music.types.ts';
 
 class AlbumsService {
   static getAll = async () => {

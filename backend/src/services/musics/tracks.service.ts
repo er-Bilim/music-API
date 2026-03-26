@@ -1,6 +1,6 @@
-import Album from '../../model/musics/Album.js';
-import Track from '../../model/musics/Track.js';
-import type { ITrack } from '../../types/music.types.js';
+import Album from '../../model/musics/Album.ts';
+import Track from '../../model/musics/Track.ts';
+import type { ITrack } from '../../types/music.types.ts';
 
 class TracksService {
   static getAll = async () => {

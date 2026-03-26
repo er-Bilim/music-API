@@ -4,7 +4,7 @@ import {
   type Request,
   type Response,
 } from 'express';
-import UsersController from '../../controllers/users/users.controller.js';
+import UsersController from '../../controllers/users/users.controller.ts';
 
 const usersRouter = Router();
 

@@ -1,5 +1,5 @@
-import User from '../../model/user/User.js';
-import type { IUser, IUserReg } from '../../types/user.types.js';
+import User from '../../model/user/User.ts';
+import type { IUser, IUserReg } from '../../types/user.types.ts';
 
 class UsersService {
   static registration = async (data: IUserReg): Promise<IUserReg> => {

@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import Album from './Album.js';
+import Album from './Album.ts';
 
 const TrackSchema = new Schema({
   album_id: {

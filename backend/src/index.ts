@@ -1,8 +1,8 @@
 import express, { type Express, type Request, type Response } from 'express';
 import cors from 'cors';
-import apiRoute from './routes/api.route.js';
+import apiRoute from './routes/api.route.ts';
 import mongoose from 'mongoose';
-import { PORT } from './constants/constants.js';
+import { PORT } from './constants/constants.ts';
 import dotenv from 'dotenv';
 
 const app: Express = express();

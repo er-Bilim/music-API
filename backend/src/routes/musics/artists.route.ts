@@ -4,8 +4,8 @@ import {
   type Request,
   type Response,
 } from 'express';
-import { imagesUpload } from '../../middlewares/multer.js';
-import ArtistController from '../../controllers/musics/artists.controller.js';
+import { imagesUpload } from '../../middlewares/multer.ts';
+import ArtistController from '../../controllers/musics/artists.controller.ts';
 
 const artistsRouter = Router();
 

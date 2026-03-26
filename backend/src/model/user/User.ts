@@ -1,8 +1,8 @@
 import { model, Schema, type HydratedDocument, type Model } from 'mongoose';
-import type { IUser } from '../../types/user.types.js';
+import type { IUser } from '../../types/user.types.ts';
 import { randomUUID } from 'crypto';
 import argon2 from 'argon2';
-import type { UserMethods } from './userModel.types.js';
+import type { UserMethods } from './userModel.types.ts';
 
 type UserModel = Model<IUser, {}, UserMethods>;
 

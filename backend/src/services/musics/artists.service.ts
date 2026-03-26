@@ -1,5 +1,5 @@
-import Artist from '../../model/musics/Artist.js';
-import type { IArtist } from '../../types/music.types.js';
+import Artist from '../../model/musics/Artist.ts';
+import type { IArtist } from '../../types/music.types.ts';
 
 class ArtistsService {
   static getAll = async () => {

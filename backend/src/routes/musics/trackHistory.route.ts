@@ -4,7 +4,7 @@ import {
   type Request,
   type Response,
 } from 'express';
-import TrackHistoryController from '../../controllers/musics/trackHistory.controller.js';
+import TrackHistoryController from '../../controllers/musics/trackHistory.controller.ts';
 
 const trackHistoryRouter = Router();
 

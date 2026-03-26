@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from 'express';
-import ArtistsService from '../../services/musics/artists.service.js';
-import type { IArtist } from '../../types/music.types.js';
+import ArtistsService from '../../services/musics/artists.service.ts';
+import type { IArtist } from '../../types/music.types.ts';
 import { Error } from 'mongoose';
 
 class ArtistController {

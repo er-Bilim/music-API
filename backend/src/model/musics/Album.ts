@@ -1,5 +1,5 @@
 import { isValidObjectId, model, Schema } from 'mongoose';
-import Artist from './Artist.js';
+import Artist from './Artist.ts';
 
 const AlbumSchema = new Schema({
   artist_id: {

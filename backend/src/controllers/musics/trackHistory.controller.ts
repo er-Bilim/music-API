@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from 'express';
-import type { ITrackHistory } from '../../types/music.types.js';
-import TrackHistoryService from '../../services/musics/trackHistory.service.js';
+import type { ITrackHistory } from '../../types/music.types.ts';
+import TrackHistoryService from '../../services/musics/trackHistory.service.ts';
 import { Error } from 'mongoose';
 
 class TrackHistoryController {

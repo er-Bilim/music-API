@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from 'express';
-import TracksService from '../../services/musics/tracks.service.js';
-import type { ITrack } from '../../types/music.types.js';
+import TracksService from '../../services/musics/tracks.service.ts';
+import type { ITrack } from '../../types/music.types.ts';
 import { Error, isValidObjectId } from 'mongoose';
 
 class TrackController {
