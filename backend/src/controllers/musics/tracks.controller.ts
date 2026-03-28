@@ -60,8 +60,15 @@ const TrackController = {
       time: body.time,
     };
 
+    if (!isValidObjectId(correctTrackData.album_id)) {
+      return res.status(404).json({
+        error: "Album doesn't exist",
+      });
+    }
+
     try {
       const track = await TracksService.create(correctTrackData);
+
       return res.json(track);
     } catch (error) {
       if (error instanceof Error.ValidationError) {
@@ -69,7 +76,6 @@ const TrackController = {
           error,
         });
       }
-
       next(error);
     }
   },
