@@ -4,6 +4,7 @@ import apiRoute from './routes/api.route.ts';
 import mongoose from 'mongoose';
 import { PORT } from './constants/constants.ts';
 import dotenv from 'dotenv';
+import config from './config.ts';
 
 const app: Express = express();
 
@@ -20,7 +21,7 @@ app.use((_req: Request, res: Response) => {
 });
 
 const run = async () => {
-  await mongoose.connect('mongodb://localhost/musics-bilim');
+  await mongoose.connect(config.db);
 
   app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`);
