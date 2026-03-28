@@ -32,12 +32,6 @@ albumsRouter.get(
   },
 );
 
-albumsRouter.post(
-  '/',
-  imagesUpload.single('image'),
-  async (req: Request, res: Response, next: NextFunction) => {
-    return await AlbumsController.create(req, res, next);
-  },
-);
+albumsRouter.post('/', imagesUpload.single('image'), AlbumsController.create);
 
 export default albumsRouter;

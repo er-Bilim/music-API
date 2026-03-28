@@ -26,11 +26,6 @@ tracksRouter.get(
   },
 );
 
-tracksRouter.post(
-  '/',
-  async (req: Request, res: Response, next: NextFunction) => {
-    return await TrackController.create(req, res, next);
-  },
-);
+tracksRouter.post('/', TrackController.create);
 
 export default tracksRouter;

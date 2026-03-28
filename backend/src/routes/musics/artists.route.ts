@@ -9,19 +9,8 @@ import ArtistController from '../../controllers/musics/artists.controller.ts';
 
 const artistsRouter = Router();
 
-artistsRouter.get(
-  '/',
-  async (req: Request, res: Response, next: NextFunction) => {
-    return await ArtistController.getAll(req, res, next);
-  },
-);
+artistsRouter.get('/', ArtistController.getAll);
 
-artistsRouter.post(
-  '/',
-  imagesUpload.single('image'),
-  async (req: Request, res: Response, next: NextFunction) => {
-    return await ArtistController.create(req, res, next);
-  },
-);
+artistsRouter.post('/', imagesUpload.single('image'), ArtistController.create);
 
 export default artistsRouter;
