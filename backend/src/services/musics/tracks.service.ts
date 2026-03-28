@@ -31,6 +31,12 @@ const TracksService = {
 
   create: async (data: ITrack) => {
     const track = new Track(data);
+    const lastTrack = await Track.findOne({ album_id: data.album_id }).sort({
+      trackNumber: -1,
+    });
+
+    track.trackNumber = lastTrack ? lastTrack.trackNumber + 1 : 1;
+
     return await track.save();
   },
 };
