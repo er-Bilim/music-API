@@ -1,5 +1,7 @@
-import { model, Schema } from 'mongoose';
+import { model, Schema, type HydratedDocument } from 'mongoose';
 import Album from './Album.ts';
+import type { NextFunction } from 'express';
+import type { ITrack } from '../../types/music.types.ts';
 
 const TrackSchema = new Schema({
   album_id: {
@@ -25,6 +27,11 @@ const TrackSchema = new Schema({
   time: {
     type: String,
     required: true,
+  },
+  trackNumber: {
+    type: Number,
+    required: true,
+    default: 1,
   },
 });
 

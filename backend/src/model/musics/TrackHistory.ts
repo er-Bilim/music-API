@@ -31,5 +31,5 @@ const TrackHistorySchema = new Schema({
   },
 });
 
-const TrackHistory = model('TrackHistory', TrackHistorySchema);
+const TrackHistory = model('Track_history', TrackHistorySchema);
 export default TrackHistory;
