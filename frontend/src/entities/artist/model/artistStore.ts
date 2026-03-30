@@ -5,18 +5,33 @@ import { getArtists } from '../service/artist.service';
 
 interface IArtistState {
   artists: IArtist[];
-  getLoading: boolean;
+  fetchLoading: boolean;
   getArtists: () => Promise<IArtist[]>;
+  error: string | null;
 }
 
 export const useArtistStore = create<IArtistState>()(
-  devtools((set) => ({
-    artists: [],
-    getLoading: false,
+  devtools(
+    (set) => ({
+      artists: [],
+      getLoading: false,
+      error: null,
 
-    getArtists: async () => {
-      const artists = await getArtists();
-      set({ artists });
+      getArtists: async () => {
+        set({ fetchLoading: true, error: null });
+        try {
+          const artists = await getArtists();
+          set({ fetchLoading: false, artists });
+        } catch (error) {
+          if (error instanceof Error) {
+            set({ fetchLoading: false, error: error.message });
+          }
+        }
+      },
+    }),
+    {
+      name: 'artistStore',
+      enabled: true,
     },
-  })),
+  ),
 );

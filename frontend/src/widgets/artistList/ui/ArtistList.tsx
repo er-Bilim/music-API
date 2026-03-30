@@ -6,7 +6,9 @@ import Loader from '../../../shared/ui/Loader/Loader';
 import { Link } from 'react-router-dom';
 
 const ArtistList = () => {
-  const { artists, getLoading, getArtists } = useArtistStore((state) => state);
+  const { artists, fetchLoading, getArtists, error } = useArtistStore(
+    (state) => state,
+  );
 
   const getArtistsHandle = useCallback(async () => {
     await getArtists();
@@ -17,12 +19,28 @@ const ArtistList = () => {
   }, [getArtistsHandle]);
 
   const renderContent = () => {
-    if (getLoading) {
+    if (fetchLoading) {
       return (
         <>
           <div className="center-loader">
             <Loader />
           </div>
+        </>
+      );
+    }
+
+    if (Array.isArray(artists) && artists.length === 0) {
+      return (
+        <>
+          <p className={classes.artist_list_empty}>No artists</p>
+        </>
+      );
+    }
+
+    if (error) {
+      return (
+        <>
+          <p className={classes.artist_list_error}>{error}</p>
         </>
       );
     }

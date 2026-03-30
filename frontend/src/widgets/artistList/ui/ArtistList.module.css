@@ -17,3 +17,21 @@
   flex-wrap: wrap;
   gap: var(--space-xl);
 }
+
+.artist_list_empty {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: var(--font-size-md);
+  color: var(--grey-900);
+}
+
+.artist_list_error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: var(--font-size-md);
+  color: var(--red-500);
+}
