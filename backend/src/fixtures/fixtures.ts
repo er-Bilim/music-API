@@ -6,7 +6,7 @@ import { randomUUID } from 'crypto';
 import Album from '../model/musics/Album.ts';
 import Track from '../model/musics/Track.ts';
 
-const fixtureImagesPath: string = `${config.publicPath}/fixtures/images`;
+const fixtureImagesPath: string = `../fixtures/images`;
 
 const run = async () => {
   await mongoose.connect(config.db);
@@ -45,7 +45,7 @@ const run = async () => {
     },
     {
       name: 'The Weeknd',
-      image: `${fixtureImagesPath}/artists/funny_the_weeknd.webp`,
+      image: `${fixtureImagesPath}/artists/the_weeknd.png`,
       information:
         'Abel Makkonen Tesfaye (born February 16, 1990 in Scarborough, Ontario), popularly known as The Weeknd, is an R&B/pop/hip-hop singer-songwriter and record producer from Toronto, Canada. He has been referred to as the songbird of his generation and the best musical talent since Michael Jackson throughout his career.',
     },
@@ -56,7 +56,7 @@ const run = async () => {
     spdm_across_the_spd_verse,
     starboy,
     the_highlights,
-  ] = await Album.create(
+  ] = await Album.create([
     {
       artist_id: metro_boomin!.id,
       name: 'Heroes & Villains',
@@ -81,9 +81,9 @@ const run = async () => {
       release_year: 2021,
       image: `${fixtureImagesPath}/albums/the_highlights.png`,
     },
-  );
+  ]);
 
-  await Track.create(
+  await Track.create([
     {
       album_id: heroes_and_villains!.id,
       name: 'Superhero',
@@ -207,7 +207,7 @@ const run = async () => {
       time: '4:09',
       trackNumber: 5,
     },
-  );
+  ]);
 };
 
 run().catch((error) => console.error(error));

@@ -1,4 +1,4 @@
-import { model, Schema } from 'mongoose';
+import mongoose, { model, Schema } from 'mongoose';
 import Album from './Album.ts';
 
 const TrackSchema = new Schema({
@@ -7,8 +7,8 @@ const TrackSchema = new Schema({
     ref: 'Album',
     required: true,
     validate: {
-      validator: async (album_id: string) => {
-        const album = await Album.findById({album_id});
+      validator: async (album_id: mongoose.Types.ObjectId) => {
+        const album = await Album.findById(album_id);
 
         if (!album) {
           return false;
