@@ -1,0 +1,23 @@
+.header {
+  margin: var(--space-md) 0;
+}
+
+.header_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md) 0;
+  background: var(--grey-900);
+  border-radius: var(--border-radius-lg);
+}
+
+.logo_name {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-thin);
+  text-transform: uppercase;
+  color: var(--blueGrey-100);
+}
+
+.logo_name:active {
+  color: var(--blueGrey-100);
+}

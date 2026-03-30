@@ -13,6 +13,20 @@
   scroll-behavior: smooth;
 }
 
+body {
+  font-family: 'Work Sans', sans-serif;
+  font-optical-sizing: auto;
+  letter-spacing: var(--space-xs);
+  background: var(--blueGrey-100);
+}
+
+.center_loader{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 a {
   text-decoration: none;
 }
@@ -23,4 +37,20 @@ a:active {
 
 ul {
   list-style: none;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--grey-900);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--blueGrey-100);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--blueGrey-100);
 }

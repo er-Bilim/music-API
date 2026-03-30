@@ -1,0 +1,14 @@
+.artist_card {
+  position: relative;
+}
+
+.artist_avatar_block {
+  cursor: pointer;
+  width: 100%;
+  height: 360px;
+  position: relative;
+}
+
+.artist_info {
+  margin-top: var(--space-md);
+}

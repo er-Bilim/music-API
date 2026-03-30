@@ -1,0 +1,10 @@
+.artist_avatar_block {
+  width: 350px;
+  height: 350px;
+}
+
+.artist_avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
