@@ -77,6 +77,7 @@ const AlbumList = () => {
     <>
       <section>
         <div className={classes.album_artist_content}>
+          <Title title={'Artist'} />
           {artist && (
             <div className={classes.album_artist_info}>
               <ArtistAvatar avatar={artist.image} name={artist.name} />
