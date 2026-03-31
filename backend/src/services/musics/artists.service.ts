@@ -7,6 +7,11 @@ const ArtistsService = {
     return artists;
   },
 
+  getArtist: async (id: string) => {
+    const artist = await Artist.findById(id);
+    return artist;
+  },
+
   create: async (data: IArtist) => {
     const artist = new Artist(data);
     return await artist.save();
