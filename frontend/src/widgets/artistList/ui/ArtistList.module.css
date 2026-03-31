@@ -1,21 +1,10 @@
-.artist_list_section {
-  margin-top: var(--space-3xl);
-  position: relative;
-}
-
-.artist_list_title {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  text-transform: uppercase;
-  margin-bottom: var(--space-lg);
-}
-
 .artist_list_content {
   display: flex;
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
   gap: var(--space-xl);
+  position: relative;
 }
 
 .artist_list_empty {

@@ -20,11 +20,15 @@ body {
   background: var(--blueGrey-100);
 }
 
-.center_loader{
+.center_loader {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+section {
+  margin-top: var(--space-3xl);
 }
 
 a {

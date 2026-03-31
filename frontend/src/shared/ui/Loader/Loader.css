@@ -2,8 +2,8 @@
   width: 50px;
   aspect-ratio: 1;
   border-radius: 50%;
-  border: 8px solid #0000;
-  border-right-color: #ffa50097;
+  border: 8px solid var(--blueGrey-300);
+  border-right-color: var(--grey-900);
   position: relative;
   animation: l24 1s infinite linear;
 }

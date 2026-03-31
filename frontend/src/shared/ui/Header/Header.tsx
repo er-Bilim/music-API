@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
-import styles from './Header.module.css';
+import classes from './Header.module.css';
 import Container from '../Container/Container';
 
 const Header = () => {
   return (
     <>
-      <header className={styles.header}>
+      <header className={classes.header}>
         <Container>
-          <div className={styles.header_content}>
-            <Link to={'/'} className={styles.logo_name}>
+          <div className={classes.header_content}>
+            <Link to={'/'} className={classes.logo_name}>
               Music
             </Link>
           </div>
