@@ -33,6 +33,17 @@ const AlbumSchema = new Schema({
   },
 });
 
+AlbumSchema.set('toJSON', {
+  transform: (_doc, ret, _options) => {
+    const { __v, ...albums } = ret;
+    return albums;
+  },
+});
+
+AlbumSchema.pre('find', function () {
+  this.sort({ release_year: -1 });
+});
+
 const Album = model('Album', AlbumSchema);
 
 export default Album;

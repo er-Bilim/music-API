@@ -4,7 +4,7 @@ import type { IAlbum } from '../../types/music.types.ts';
 import deleteImage from '../../utils/deleteImage.ts';
 import { Error, isValidObjectId } from 'mongoose';
 
-const AlbumsController =  {
+const AlbumsController = {
   getAll: async (_req: Request, res: Response, next: NextFunction) => {
     try {
       const albums = await AlbumsService.getAll();
@@ -41,12 +41,8 @@ const AlbumsController =  {
     }
   },
 
-  getArtistAlbums: async (
-    _req: Request,
-    res: Response,
-    artist_id: string,
-  ) => {
-    const artistAlbums = await AlbumsService.getArtistAlbums(artist_id);
+  getArtistAlbums: async (_req: Request, res: Response, artist_id: string) => {
+    const artistAlbums = await AlbumsService.getArtistAlbums(artist_id);    
 
     if (artistAlbums.length === 0) {
       return res.status(404).json({
@@ -57,7 +53,7 @@ const AlbumsController =  {
     return res.json(artistAlbums);
   },
 
-  create:  async (req: Request, res: Response, next: NextFunction) => {
+  create: async (req: Request, res: Response, next: NextFunction) => {
     const body: IAlbum = req.body;
 
     const correctAlbumData: IAlbum = {
@@ -80,6 +76,6 @@ const AlbumsController =  {
       next(error);
     }
   },
-}
+};
 
 export default AlbumsController;
