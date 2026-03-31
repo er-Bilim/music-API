@@ -7,13 +7,16 @@ import { Link } from 'react-router-dom';
 import Title from '../../../shared/ui/Title/Title';
 
 const ArtistList = () => {
-  const { artists, fetchLoading, getArtists, error } = useArtistStore(
-    (state) => state,
-  );
+  const { artists, fetchLoading, getArtists, clearArtists, error } =
+    useArtistStore((state) => state);
 
   useEffect(() => {
     getArtists();
-  }, [getArtists]);
+
+    return () => {
+      clearArtists();
+    };
+  }, [getArtists, clearArtists]);
 
   const renderContent = () => {
     if (fetchLoading) {

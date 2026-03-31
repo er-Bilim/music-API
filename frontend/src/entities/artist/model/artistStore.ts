@@ -9,6 +9,8 @@ interface IArtistState {
   fetchLoading: boolean;
   getArtists: () => Promise<IArtist[]>;
   getArtist: (artist_id: string) => Promise<IArtist>;
+  clearArtists: () => void;
+  clearArtist: () => void;
   error: string | null;
 }
 
@@ -19,6 +21,14 @@ export const useArtistStore = create<IArtistState>()(
       artist: null,
       getLoading: false,
       error: null,
+
+      clearArtists: () => {
+        set({ artists: [] });
+      },
+
+      clearArtist: () => {
+        set({ artist: null });
+      },
 
       getArtists: async () => {
         set({ fetchLoading: true, error: null });

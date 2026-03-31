@@ -14,11 +14,13 @@ const AlbumList = () => {
     albums,
     fetchLoading: albumLoading,
     getArtistAlbums,
+    clearAlbums,
     error: albumError,
   } = useAlbumStore((state) => state);
   const {
     artist,
     getArtist,
+    clearArtist,
     fetchLoading: artistLoading,
     error: artistError,
   } = useArtistStore((state) => state);
@@ -32,7 +34,12 @@ const AlbumList = () => {
       getArtist(artist_id);
       getArtistAlbums(artist_id);
     }
-  }, [getArtist, getArtistAlbums, artist_id]);
+
+    return () => {
+      clearArtist();
+      clearAlbums();
+    };
+  }, [getArtist, getArtistAlbums, clearArtist, clearAlbums, artist_id]);
 
   const renderContent = () => {
     if (albumLoading && artistLoading) {
