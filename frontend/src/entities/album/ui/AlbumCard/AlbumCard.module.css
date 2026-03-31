@@ -1,0 +1,17 @@
+.album_card {
+  width: 590px;
+  display: flex;
+  flex-direction: row;
+  background: var(--red-900);
+  border-radius: 0 var(--border-radius-lg) var(--border-radius-lg) 0;
+  border: 1px solid var(--grey-900);
+}
+
+.album_cover {
+  position: relative;
+}
+
+.album_info {
+  padding: var(--space-md);
+  color: var(--blueGrey-100);
+}

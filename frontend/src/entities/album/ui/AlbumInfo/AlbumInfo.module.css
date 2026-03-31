@@ -1,0 +1,11 @@
+.album_info {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--space-md);
+}
+
+.album_info_name {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+}

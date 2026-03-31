@@ -1,0 +1,22 @@
+.album_artist_content {
+  margin-bottom: var(--space-3xl);
+}
+
+.album_artist_info {
+  display: flex;
+  flex-direction: row;
+  column-gap: var(--space-lg);
+}
+
+.album_artist_info_name {
+  font-size: var(--font-size-xl);
+  padding-top: var(--space-md);
+}
+
+.album_list_content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}

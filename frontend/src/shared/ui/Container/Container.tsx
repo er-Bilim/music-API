@@ -1,10 +1,10 @@
 import type { FC, PropsWithChildren } from 'react';
-import styles from './Container.module.css';
+import classes from './Container.module.css';
 
 const Container: FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
-      <div className={styles.container}>{children}</div>
+      <div className={classes.container}>{children}</div>
     </>
   );
 };
