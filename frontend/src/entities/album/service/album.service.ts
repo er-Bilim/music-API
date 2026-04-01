@@ -7,3 +7,10 @@ export const getAlbums = async (artist_id: string): Promise<IAlbum[]> => {
 
   return data;
 };
+
+export const getAlbum = async (album_id: string): Promise<IAlbum> => {
+  const response = await axiosApi(`/albums/${album_id}`);
+  const data = response.data;
+  
+  return data;
+};

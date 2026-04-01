@@ -1,9 +1,10 @@
+import TrackList from '../../widgets/trackList/ui/TrackList';
 
 const TrackPage = () => {
   return (
-    <div>
-      
-    </div>
+    <>
+      <TrackList />
+    </>
   );
 };
 

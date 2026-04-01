@@ -1,0 +1,45 @@
+.tracks_block {
+  margin-top: var(--space-3xl);
+}
+
+.tracks_block_content {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-xl);
+}
+
+.album_info_block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.track_list_title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  background: var(--grey-900);
+  color: var(--blueGrey-100);
+  border-radius: var(--border-radius-lg);
+  text-align: center;
+  margin-bottom: var(--space-lg);
+  line-height: 3;
+}
+
+.track_list_content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.artist_info {
+  display: flex;
+  flex-direction: row;
+  column-gap: var(--space-lg);
+}
+
+.artist_info_name {
+  font-size: var(--font-size-xl);
+}
