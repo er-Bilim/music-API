@@ -9,8 +9,28 @@ const AlbumsService = {
   },
 
   getById: async (album_id: string) => {
-    const album = await Album.findById(album_id).populate('artist_id');
-    return album;
+    const album = await Album.aggregate([
+      {
+        $match: {
+          _id: new mongoose.Types.ObjectId(album_id),
+        },
+      },
+      {
+        $lookup: {
+          from: 'artists',
+          localField: 'artist_id',
+          foreignField: '_id',
+          as: 'artist',
+        },
+      },
+      {
+        $project: {
+          artist_id: 0,
+          __v: 0,
+        },
+      },
+    ]);
+    return album[0];
   },
 
   getArtistAlbums: async (artist_id: string) => {
@@ -39,14 +59,14 @@ const AlbumsService = {
       {
         $project: {
           tracks: 0,
-          __v: 0
+          __v: 0,
         },
       },
       {
         $sort: {
           release_year: -1,
         },
-      }
+      },
     ]);
 
     return artistsAlbums;
