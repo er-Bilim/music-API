@@ -2,6 +2,8 @@ import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import type { IArtist } from './artist.types';
 import { getArtist, getArtists } from '../service/artist.service';
+import type { IGlobalError } from '../../../shared/types/error.types';
+import { parseApiError } from '../../../shared/api/error/normalizeResError';
 
 interface IArtistState {
   artists: IArtist[];
@@ -11,7 +13,7 @@ interface IArtistState {
   getArtist: (artist_id: string) => Promise<IArtist>;
   clearArtists: () => void;
   clearArtist: () => void;
-  error: string | null;
+  error: IGlobalError | null;
 }
 
 export const useArtistStore = create<IArtistState>()(
@@ -36,9 +38,10 @@ export const useArtistStore = create<IArtistState>()(
           const artists = await getArtists();
           set({ fetchLoading: false, artists });
         } catch (error) {
-          if (error instanceof Error) {
-            set({ fetchLoading: false, error: error.message });
-          }
+          set({
+            fetchLoading: false,
+            error: parseApiError(error as IGlobalError),
+          });
         }
       },
 
@@ -48,9 +51,10 @@ export const useArtistStore = create<IArtistState>()(
           const artist = await getArtist(artist_id);
           set({ fetchLoading: false, artist });
         } catch (error) {
-          if (error instanceof Error) {
-            set({ fetchLoading: false, error: error.message });
-          }
+          set({
+            fetchLoading: false,
+            error: parseApiError(error as IGlobalError),
+          });
         }
       },
     }),

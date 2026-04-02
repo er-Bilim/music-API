@@ -2,13 +2,15 @@ import { devtools } from 'zustand/middleware';
 import type { ITrack } from './track.types';
 import { create } from 'zustand';
 import { getTracks } from '../service/track.service';
+import type { IGlobalError } from '../../../shared/types/error.types';
+import { parseApiError } from '../../../shared/api/error/normalizeResError';
 
 interface ITrackState {
   tracks: ITrack[];
   fetchLoading: boolean;
   getTracks: (album_id: string) => Promise<ITrack[]>;
   clearTracks: () => void;
-  error: string | null;
+  error: IGlobalError | null;
 }
 
 export const useTracksStore = create<ITrackState>()(
@@ -28,9 +30,10 @@ export const useTracksStore = create<ITrackState>()(
           const tracks = await getTracks(album_id);
           set({ fetchLoading: false, tracks });
         } catch (error) {
-          if (error instanceof Error) {
-            set({ fetchLoading: false, error: error.message });
-          }
+          set({
+            fetchLoading: false,
+            error: parseApiError(error as IGlobalError),
+          });
         }
       },
     }),

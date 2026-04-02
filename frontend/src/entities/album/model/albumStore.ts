@@ -2,6 +2,8 @@ import { create } from 'zustand';
 import type { IAlbum } from './album.types';
 import { devtools } from 'zustand/middleware';
 import { getAlbum, getAlbums } from '../service/album.service';
+import type { IGlobalError } from '../../../shared/types/error.types';
+import { parseApiError } from '../../../shared/api/error/normalizeResError';
 
 interface IAlbumState {
   albums: IAlbum[];
@@ -11,7 +13,7 @@ interface IAlbumState {
   getArtistAlbum: (album_id: string) => Promise<IAlbum>;
   clearAlbums: () => void;
   clearAlbum: () => void;
-  error: string | null;
+  error: IGlobalError | null;
 }
 
 export const useAlbumStore = create<IAlbumState>()(
@@ -36,9 +38,10 @@ export const useAlbumStore = create<IAlbumState>()(
           const albums = await getAlbums(artist_id);
           set({ fetchLoading: false, albums });
         } catch (error) {
-          if (error instanceof Error) {
-            set({ fetchLoading: false, error: error.message });
-          }
+          set({
+            fetchLoading: false,
+            error: parseApiError(error as IGlobalError),
+          });
         }
       },
 
@@ -48,9 +51,10 @@ export const useAlbumStore = create<IAlbumState>()(
           const album = await getAlbum(album_id);
           set({ fetchLoading: false, album });
         } catch (error) {
-          if (error instanceof Error) {
-            set({ fetchLoading: false, error: error.message });
-          }
+          set({
+            fetchLoading: false,
+            error: parseApiError(error as IGlobalError),
+          });
         }
       },
     }),
