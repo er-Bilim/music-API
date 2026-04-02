@@ -1,5 +1,8 @@
-export interface IError {
+export interface IGlobalError {
   error: string;
+}
+
+export interface IValidationError {
   errors: {
     [key: string]: {
       name: string;
