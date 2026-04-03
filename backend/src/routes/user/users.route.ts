@@ -4,7 +4,7 @@ import auth from '../../middlewares/auth.ts';
 
 const usersRouter = Router();
 
-usersRouter.post('/', auth, UsersController.registration);
+usersRouter.post('/', UsersController.registration);
 
 usersRouter.post('/sessions', auth, UsersController.authentication);
 
