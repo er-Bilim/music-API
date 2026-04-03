@@ -11,6 +11,12 @@
   border-radius: var(--border-radius-lg);
 }
 
+.header_menu {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-lg);
+}
+
 .logo_name {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-thin);
