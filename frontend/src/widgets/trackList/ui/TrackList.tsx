@@ -25,7 +25,6 @@ const TrackList = () => {
     fetchLoading: fetchTrackLoading,
     getTracks,
     clearTracks,
-    error: trackError,
   } = useTracksStore((state) => state);
 
   const [queryParams] = useSearchParams();
@@ -62,11 +61,10 @@ const TrackList = () => {
       );
     }
 
-    if (trackError || albumError) {
+    if (albumError) {
       return (
         <>
-          <p className={classes.track_list_error}>{albumError}</p>
-          <p className={classes.track_list_error}>{trackError}</p>
+          <p className={classes.track_list_error}>{albumError.error}</p>
         </>
       );
     }

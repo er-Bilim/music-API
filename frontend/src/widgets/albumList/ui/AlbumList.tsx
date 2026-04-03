@@ -15,7 +15,6 @@ const AlbumList = () => {
     fetchLoading: albumLoading,
     getArtistAlbums,
     clearAlbums,
-    error: albumError,
   } = useAlbumStore((state) => state);
   const {
     artist,
@@ -60,11 +59,10 @@ const AlbumList = () => {
       );
     }
 
-    if (artistError || albumError) {
+    if (artistError) {
       return (
         <>
-          <p className={classes.artist_list_error}>{artistError}</p>
-          <p className={classes.artist_list_error}>{albumError}</p>
+          <p className={classes.artist_list_error}>{artistError.error}</p>
         </>
       );
     }
@@ -72,8 +70,8 @@ const AlbumList = () => {
     return (
       <>
         {albums.map((album) => (
-          <Link to={`/tracks?album=${album._id}`}>
-            <AlbumCard album={album} key={album._id} />
+          <Link to={`/tracks?album=${album._id}`} key={album._id}>
+            <AlbumCard album={album} />
           </Link>
         ))}
       </>

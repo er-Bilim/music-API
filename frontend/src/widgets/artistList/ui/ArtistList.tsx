@@ -40,7 +40,7 @@ const ArtistList = () => {
     if (error) {
       return (
         <>
-          <p className={classes.artist_list_error}>{error}</p>
+          <p className={classes.artist_list_error}>{error.error}</p>
         </>
       );
     }
