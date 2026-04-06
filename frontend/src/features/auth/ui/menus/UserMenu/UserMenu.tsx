@@ -7,7 +7,7 @@ const UserMenu = () => {
       <ul className={classes.nav_items}>
         <li className={classes.nav_item}>
           <NavLink
-            to={'/tack_history'}
+            to={'/track-history'}
             className={({ isActive }) =>
               isActive
                 ? `${classes.nav_item_link} ${classes.active}`
