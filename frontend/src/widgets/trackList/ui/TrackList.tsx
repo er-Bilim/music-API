@@ -88,7 +88,9 @@ const TrackList = () => {
               <div className={classes.artist_block_content}>
                 {album.artist.map((artist) => (
                   <div className={classes.artist_info}>
-                    <ArtistAvatar avatar={artist.image} name={artist.name} />
+                    <div className={classes.artist_avatar}>
+                      <ArtistAvatar avatar={artist.image} name={artist.name} />
+                    </div>
                     <div className={classes.artist_info_name}>
                       <ArtistName name={artist.name} />
                     </div>

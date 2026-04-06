@@ -14,7 +14,7 @@ const schemaRegister = z.object({
     .string()
     .trim()
     .min(3, { message: 'Username must be at least 3 characters long!' })
-    .max(12, { message: 'Username must be at most 12 characters long!' })
+    .max(25, { message: 'Username must be at most 25 characters long!' })
     .regex(
       /^[a-zA-Z0-9]+$/,
       'Your username must contain only letters and numbers!',

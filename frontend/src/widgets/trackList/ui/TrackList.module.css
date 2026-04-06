@@ -43,3 +43,8 @@
 .artist_info_name {
   font-size: var(--font-size-xl);
 }
+
+.artist_avatar {
+  width: 200px;
+  height: 100%;
+}
