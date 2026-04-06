@@ -48,8 +48,8 @@ const ArtistList = () => {
     return (
       <>
         {artists.map((artist) => (
-          <Link to={`/albums?artist=${artist._id}`}>
-            <ArtistCard artist={artist} key={artist._id} />
+          <Link to={`/albums?artist=${artist._id}`} key={artist._id}>
+            <ArtistCard artist={artist} />
           </Link>
         ))}
       </>

@@ -1,0 +1,15 @@
+.alert {
+  width: 100%;
+  padding: var(--space-md);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-md);
+  align-items: center;
+  justify-content: center;
+}
+
+.alert_error {
+  background: var(--red-100);
+  color: var(--red-700);
+}

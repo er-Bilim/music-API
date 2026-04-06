@@ -1,0 +1,21 @@
+.avatar_block {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: var(--circular);
+  background: var(--grey-100);
+  border: 1px solid var(--grey-900);
+  overflow: hidden;
+}
+
+.avatar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--grey-900);
+}
