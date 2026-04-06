@@ -1,9 +1,10 @@
+import HistoryList from "../../widgets/historyList/ui/HistoryList";
 
 
 const TrackHistoryPage = () => {
   return (
     <div>
-      <h1>Tack History</h1>
+      <HistoryList/>
     </div>
   );
 };

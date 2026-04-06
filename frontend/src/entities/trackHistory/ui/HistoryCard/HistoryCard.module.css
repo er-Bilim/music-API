@@ -1,0 +1,16 @@
+.history_card {
+  width: 360px;
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+  border: 1px solid var(--grey-900);
+  padding: var(--space-md);
+  border-radius: var(--border-radius-sm);
+}
+
+.artist {
+  width: 100px;
+  height: 100px;
+  border-radius: var(--circular);
+  overflow: hidden;
+}

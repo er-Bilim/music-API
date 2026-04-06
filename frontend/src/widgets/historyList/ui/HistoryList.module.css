@@ -1,0 +1,11 @@
+.track_history {
+  margin-top: var(--space-4xl);
+}
+
+.track_history_list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-xl);
+  flex-wrap: wrap;
+}

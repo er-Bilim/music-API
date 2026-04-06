@@ -1,0 +1,11 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.info_artist {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
