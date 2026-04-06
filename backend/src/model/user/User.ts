@@ -18,7 +18,6 @@ const UserSchema = new Schema<HydratedDocument<IUser>, UserModel, UserMethods>({
   },
   token: {
     type: String,
-    required: true,
   },
 });
 
