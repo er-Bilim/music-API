@@ -1,40 +1,81 @@
-# 📝 Music – Practice Repository
+# 📝 Music API – Practice Repository
 
-> ⚠️ **This is an educational repository** This code is written solely for practice and to explore technologies
+> ⚠️ **Educational Repository** – This project is built to master Full-stack development, Mongoose relationships, and secure API architecture.
 
-A simple REST API application **Music API**. Each user can register, log in.
+**Music API** is a robust backend service for a music cataloging application. It supports artists, albums, tracks, and personalized user listening history.
 
-The goal is to practice:
+---
 
-- Working with **Mongoose** (schemas, models, methods)
-- Proper **architecture** and query structure
-- **Password hashing** using `argon2`
+## 🎯 Project Goals & Practice
 
-**Best practices for controllers:**
+- **Mongoose Mastery:** Complex schemas with `ref` relationships and `.populate()` logic.
+- **Clean Architecture:** Strict separation between Routes, Controllers, and Services.
+- **Advanced Routing:** Implementation of nested resource filtering via Query Params (e.g., `?artist=ID` or `?album=ID`).
+- **Security & Auth:** Password hashing with **Argon2** and session-based access via custom `auth` middleware.
+- **File Handling:** Image processing and uploads using **Multer**.
 
-- Always wrap in `try/catch`
-- Return clear status codes (`200`, `201`, `400`, `404`, `500`)
-- Don't write business logic directly in routes
+## 🛠 Tech Stack
 
-## 🔐 Password Hashing
+- **Runtime:** Node.js with Express
+- **Language:** TypeScript
+- **Database:** MongoDB (Mongoose)
+- **Auth:** JWT / Argon2
+- **Files:** Multer (for Artist/Album covers)
 
-The `argon2` library is used
+## 📡 API Documentation (Endpoints)
 
-## 🚀 Launch
+All routes are prefixed with `/api`.
 
-### Backend (API)
+### 👤 Users & Auth
+- `POST /users` — Register a new user.
+- `POST /users/sessions` — Login and receive a session token.
 
-Start the server
+### 🎸 Artists
+- `GET /artists` — Get all artists.
+- `GET /artists/:id` — Get detailed info about a specific artist.
+- `POST /artists` — Create a new artist (Supports image upload).
+
+### 💿 Albums
+- `GET /albums` — Get all albums.
+- `GET /albums?artist={ID}` — Get all albums by a specific artist.
+- `GET /albums/:album_id` — Get specific album details.
+- `POST /albums` — Create an album (Supports image upload, linked to Artist).
+
+### 🎵 Tracks
+- `GET /tracks` — Get all tracks.
+- `GET /tracks?album={ID}` — Get tracks from a specific album.
+- `GET /tracks?artist={ID}` — Get all tracks by a specific artist.
+- `POST /tracks` — Create a new track.
+
+### 📜 Track History (Protected)
+*Requires `Authorization` header with a valid user token.*
+- `GET /track_history` — View personal listening history (Sorted by date DESC).
+- `POST /track_history` — Add a track to history (Triggered on play).
+
+## 🏗 Best Practices Implemented
+
+- **Controller Logic:** All controllers are wrapped in `try/catch` with standardized HTTP status codes (`201`, `400`, `404`, `500`).
+- **Middleware:** - `auth`: Protects private routes and identifies the user via token.
+    - `multer`: Handles `multipart/form-data` for seamless image uploads.
+- **Query Structure:** Efficient data fetching using Mongoose queries for dynamic filtering.
+
+## 🚀 Installation & Launch
+
+### 1. Run Backend (API)
 
 ```bash
+cd backend
+
 npm install
 
 npm run dev
 ```
 
-### Frontend
+### 2. Run Frontend
 
 ```bash
+cd frontend
+
 npm install
 
 npm run dev
