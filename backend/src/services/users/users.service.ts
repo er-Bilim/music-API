@@ -20,7 +20,9 @@ const UsersService = {
 
       data.user = user;
       if (isMatch) {
-        data.isMatch = true;
+        data.isMatch = isMatch;
+        data.user.generateAuthToken();
+        await data.user.save();
       }
     }
 
