@@ -17,5 +17,6 @@ export interface ITrack {
 }
 
 export interface ITrackHistory {
-  track_id: string;
+  track: string;
+  artist: string;
 }

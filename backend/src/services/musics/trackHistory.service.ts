@@ -1,20 +1,19 @@
+import type { HydratedDocument, Types } from 'mongoose';
 import TrackHistory from '../../model/musics/TrackHistory.ts';
-import User from '../../model/user/User.ts';
 import type { ITrackHistory } from '../../types/music.types.ts';
+import type { IUser } from '../../types/user.types.ts';
 
 const TrackHistoryService = {
-  create: async (token: string, data: ITrackHistory) => {
-    const user = await User.findOne({ token });
+  getAll: async (user: HydratedDocument<IUser>) => {
+    const history = await TrackHistory.find({ user: user._id }).populate(
+      'track artist',
+    );
+    return history;
+  },
 
-    if (user) {
-      const trackHistory = new TrackHistory({
-        track_id: data.track_id,
-        user_id: user.id,
-      });
-      return await trackHistory.save();
-    }
-
-    return null;
+  create: async (data: ITrackHistory) => {
+    const trackHistory = new TrackHistory(data);
+    return await trackHistory.save();
   },
 };
 
