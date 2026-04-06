@@ -1,7 +1,23 @@
+import { NavLink } from 'react-router-dom';
+import classes from './UserMenu.module.css';
+
 const UserMenu = () => {
   return (
     <>
-      <div></div>
+      <ul className={classes.nav_items}>
+        <li className={classes.nav_item}>
+          <NavLink
+            to={'/tack_history'}
+            className={({ isActive }) =>
+              isActive
+                ? `${classes.nav_item_link} ${classes.active}`
+                : `${classes.nav_item_link}`
+            }
+          >
+            track history
+          </NavLink>
+        </li>
+      </ul>
     </>
   );
 };

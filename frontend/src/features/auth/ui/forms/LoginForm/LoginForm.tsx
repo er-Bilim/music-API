@@ -3,10 +3,12 @@ import { useUserStore } from '../../../../../entities/user/model/userStore';
 import Title from '../../../../../shared/ui/Title/Title';
 import z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import type { IUser } from '../../../../../entities/user/model/user.types';
+import type { ILogin } from '../../../../../entities/user/model/user.types';
 import classes from '../AuthForm.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleDown } from '@fortawesome/free-solid-svg-icons';
+import Alert from '../../../../../shared/ui/Alert/Alert';
+import { useNavigate } from 'react-router-dom';
 
 const schemaLogin = z.object({
   username: z
@@ -28,11 +30,10 @@ const schemaLogin = z.object({
 type LoginFormData = z.infer<typeof schemaLogin>;
 
 const LoginForm = () => {
-  const {
-    login: loginUser,
-    loginLoading,
-    loginError,
-  } = useUserStore((state) => state);
+  const navigate = useNavigate();
+  const { loginUser, loginLoading, loginError } = useUserStore(
+    (state) => state,
+  );
 
   const {
     register,
@@ -42,8 +43,12 @@ const LoginForm = () => {
     resolver: zodResolver(schemaLogin),
   });
 
-  const registerSubmit = (data: IUser) => {
-    loginUser(data);
+  const loginSubmit = async (data: ILogin) => {
+    try {
+      await loginUser(data).then(() => navigate('/'));
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -55,7 +60,12 @@ const LoginForm = () => {
         <div className={classes.form_title}>
           <Title title="Sign in" />
         </div>
-        <form onSubmit={handleSubmit(registerSubmit)}>
+
+        <div className={classes.alert}>
+          {loginError && <Alert type="error" message={loginError.error} />}
+        </div>
+
+        <form onSubmit={handleSubmit(loginSubmit)}>
           <div className={classes.form_inputs_block}>
             <div className={classes.form_input_content}>
               <label htmlFor="username" className={classes.form_}>
@@ -92,7 +102,11 @@ const LoginForm = () => {
                 </p>
               )}
             </div>
-            <button className={classes.form_submit_button} type="submit">
+            <button
+              className={classes.form_submit_button}
+              type="submit"
+              disabled={loginLoading}
+            >
               sign in
             </button>
           </div>

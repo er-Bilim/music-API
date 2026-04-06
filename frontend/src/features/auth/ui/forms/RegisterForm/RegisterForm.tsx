@@ -2,11 +2,12 @@ import classes from '../AuthForm.module.css';
 import z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import type { IUser } from '../../../../../entities/user/model/user.types';
+import type { IRegister } from '../../../../../entities/user/model/user.types';
 import { useUserStore } from '../../../../../entities/user/model/userStore';
 import Title from '../../../../../shared/ui/Title/Title';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUp } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 const schemaRegister = z.object({
   username: z
@@ -28,11 +29,8 @@ const schemaRegister = z.object({
 type RegisterFormData = z.infer<typeof schemaRegister>;
 
 const RegisterForm = () => {
-  const {
-    register: registerUser,
-    registerLoading,
-    registerError,
-  } = useUserStore((state) => state);
+  const navigate = useNavigate();
+  const { registerUser, registerLoading } = useUserStore((state) => state);
 
   const {
     register,
@@ -42,8 +40,12 @@ const RegisterForm = () => {
     resolver: zodResolver(schemaRegister),
   });
 
-  const registerSubmit = (data: IUser) => {
-    registerUser(data);
+  const registerSubmit = async (data: IRegister) => {
+    try {
+      await registerUser(data).then(() => navigate('/'));
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -92,7 +94,11 @@ const RegisterForm = () => {
                 </p>
               )}
             </div>
-            <button className={classes.form_submit_button} type="submit">
+            <button
+              className={classes.form_submit_button}
+              type="submit"
+              disabled={registerLoading}
+            >
               sign up
             </button>
           </div>

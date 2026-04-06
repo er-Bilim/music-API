@@ -1,3 +1,7 @@
+.alert {
+  margin: var(--space-md) 0;
+}
+
 .form_block {
   width: 100%;
   border: 1px solid var(--grey-900);
@@ -51,4 +55,10 @@
   color: var(--blueGrey-100);
   font-size: var(--font-size-md);
   cursor: pointer;
+}
+
+.form_input_error {
+  color: var(--red-500);
+  font-size: var(--font-size-sm);
+  padding-left: var(--space-sm);
 }
