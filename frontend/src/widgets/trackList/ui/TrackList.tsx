@@ -75,8 +75,8 @@ const TrackList = () => {
         {tracks.map((track) => (
           <div key={track._id} className={classes.tracks}>
             <TrackCard track={track} />
-            {album && (
-              <PlayButton track={track._id} artist={album.artist[0]._id} />
+            {album && album.artist && (
+              <PlayButton track={track} artist={album.artist[0]} />
             )}
           </div>
         ))}
@@ -93,7 +93,7 @@ const TrackList = () => {
               <Title title="artist" />
               <div className={classes.artist_block_content}>
                 {album.artist.map((artist) => (
-                  <div className={classes.artist_info}>
+                  <div className={classes.artist_info} key={artist._id}>
                     <div className={classes.artist_avatar}>
                       <ArtistAvatar avatar={artist.image} name={artist.name} />
                     </div>

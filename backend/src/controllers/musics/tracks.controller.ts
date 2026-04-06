@@ -58,6 +58,7 @@ const TrackController = {
       album_id: body.album_id,
       name: body.name,
       time: body.time,
+      youtubeLink: body.youtubeLink || null,
     };
 
     if (!isValidObjectId(correctTrackData.album_id)) {

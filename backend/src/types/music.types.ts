@@ -14,6 +14,7 @@ export interface ITrack {
   album_id: string;
   name: string;
   time: string;
+  youtubeLink: string | null;
 }
 
 export interface ITrackHistory {

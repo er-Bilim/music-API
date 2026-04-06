@@ -4,4 +4,5 @@ export interface ITrack {
   name: string;
   time: string;
   trackNumber: number;
+  youtubeLink: string | null;
 }

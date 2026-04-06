@@ -32,6 +32,11 @@ const TrackSchema = new Schema({
     required: true,
     default: 1,
   },
+
+  youtubeLink: {
+    type: String,
+    required: false,
+  },
 });
 
 TrackSchema.set('toJSON', {
