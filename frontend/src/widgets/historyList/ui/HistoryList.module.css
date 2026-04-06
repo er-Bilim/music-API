@@ -6,6 +6,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: var(--space-xl);
+  justify-content: space-between;
   flex-wrap: wrap;
 }

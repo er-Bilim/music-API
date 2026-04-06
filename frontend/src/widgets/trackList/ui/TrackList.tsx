@@ -10,6 +10,7 @@ import AlbumCover from '../../../entities/album/ui/AlbumCover/AlbumCover';
 import AlbumInfo from '../../../entities/album/ui/AlbumInfo/AlbumInfo';
 import ArtistAvatar from '../../../entities/artist/ui/ArtistAvatar/ArtistAvatar';
 import ArtistName from '../../../entities/artist/ui/ArtistName/ArtistName';
+import PlayButton from '../../../features/auth/ui/playTrack/ui/PlayButton/PlayButton';
 
 const TrackList = () => {
   const {
@@ -72,7 +73,12 @@ const TrackList = () => {
     return (
       <>
         {tracks.map((track) => (
-          <TrackCard track={track} />
+          <div key={track._id} className={classes.tracks}>
+            <TrackCard track={track} />
+            {album && (
+              <PlayButton track={track._id} artist={album.artist[0]._id} />
+            )}
+          </div>
         ))}
       </>
     );

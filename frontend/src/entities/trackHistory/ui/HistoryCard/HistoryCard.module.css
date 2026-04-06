@@ -1,5 +1,5 @@
 .history_card {
-  width: 360px;
+  width: 45%;
   display: flex;
   gap: var(--space-md);
   align-items: center;

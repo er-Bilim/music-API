@@ -34,6 +34,8 @@ export const useTracksStore = create<ITrackState>()(
             fetchLoading: false,
             error: parseApiError(error as IGlobalError),
           });
+
+          throw error;
         }
       },
     }),

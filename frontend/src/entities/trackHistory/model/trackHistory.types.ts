@@ -5,5 +5,10 @@ export interface ITrackHistory {
   _id: string;
   artist: IArtistShow;
   track: ITrack;
-  created_at: string;
+  datetime: string;
+}
+
+export interface ITrackHistoryMutation {
+  artist: string;
+  track: string;
 }

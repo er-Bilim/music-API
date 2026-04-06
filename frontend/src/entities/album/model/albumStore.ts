@@ -42,6 +42,8 @@ export const useAlbumStore = create<IAlbumState>()(
             fetchLoading: false,
             error: parseApiError(error as IGlobalError),
           });
+
+          throw error;
         }
       },
 
@@ -55,6 +57,8 @@ export const useAlbumStore = create<IAlbumState>()(
             fetchLoading: false,
             error: parseApiError(error as IGlobalError),
           });
+
+          throw error;
         }
       },
     }),

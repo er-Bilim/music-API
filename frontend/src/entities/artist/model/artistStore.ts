@@ -42,6 +42,8 @@ export const useArtistStore = create<IArtistState>()(
             fetchLoading: false,
             error: parseApiError(error as IGlobalError),
           });
+
+          throw error;
         }
       },
 
@@ -55,6 +57,8 @@ export const useArtistStore = create<IArtistState>()(
             fetchLoading: false,
             error: parseApiError(error as IGlobalError),
           });
+
+          throw error;
         }
       },
     }),

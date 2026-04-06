@@ -2,9 +2,9 @@ import { devtools } from 'zustand/middleware';
 import type { ITrackHistory } from './trackHistory.types';
 import { create } from 'zustand';
 import type { IGlobalError } from '../../../shared/types/error.types';
-import { isAxiosError } from 'axios';
 import { serviceGetTrackHistory } from '../service/trackHistory.service';
 import { useUserStore } from '../../user/model/userStore';
+import { parseApiError } from '../../../shared/api/error/normalizeResError';
 
 interface ITrackHistoryState {
   trackHistory: ITrackHistory[];
@@ -40,14 +40,10 @@ export const useTrackHistoryStore = create<ITrackHistoryState>()(
             });
           }
         } catch (error) {
-          if (isAxiosError(error)) {
-            if (error.response) {
-              set({
-                fetchLoading: false,
-                fetchError: null,
-              });
-            }
-          }
+          set({
+            fetchLoading: false,
+            fetchError: parseApiError(error as IGlobalError),
+          });
 
           throw error;
         }

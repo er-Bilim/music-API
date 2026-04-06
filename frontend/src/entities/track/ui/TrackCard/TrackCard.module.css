@@ -1,5 +1,4 @@
 .track_card {
   width: 100%;
-  border-bottom: 1px solid var(--grey-900);
   padding: var(--space-md);
 }

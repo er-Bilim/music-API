@@ -20,7 +20,7 @@ const HistoryCard: FC<IHistoryCardProps> = ({ history }) => {
       <HistoryInfo
         artistName={history.artist.name}
         trackName={history.track.name}
-        date={history.created_at}
+        date={history.datetime}
       />
     </div>
   );
