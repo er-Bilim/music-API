@@ -7,7 +7,7 @@ const TrackHistoryService = {
   getAll: async (user: HydratedDocument<IUser>) => {
     const history = await TrackHistory.find({ user: user._id }).populate(
       'track artist',
-    );
+    ).sort({datetime: -1});
     return history;
   },
 

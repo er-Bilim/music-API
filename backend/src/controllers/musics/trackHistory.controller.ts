@@ -38,7 +38,7 @@ const TrackHistoryController = {
       };
       const trackHistory = await TrackHistoryService.create(correctData);
 
-      return res.json(trackHistory);
+      return res.json({ message: 'listen listen', trackHistory });
     } catch (error) {
       if (error instanceof Error.ValidationError) {
         return res.status(400).json({
