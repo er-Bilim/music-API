@@ -17,9 +17,9 @@ const HistoryInfo: FC<IHistoryInfoProps> = ({
   return (
     <>
       <div className={classes.info}>
-        <p className={classes.info_artist}>
+        <div className={classes.info_artist}>
           Artist <ArtistName name={artistName} />
-        </p>
+        </div>
         <p>Track {trackName}</p>
         <p>{formatDate(date)}</p>
       </div>
