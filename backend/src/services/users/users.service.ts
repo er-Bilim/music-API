@@ -1,9 +1,9 @@
 import type { HydratedDocument } from 'mongoose';
 import User from '../../model/user/User.ts';
-import type { IUser, IUserReg } from '../../types/user.types.ts';
+import type { IUser, IUserReg, IUserSave } from '../../types/user.types.ts';
 
 const UsersService = {
-  registration: async (data: IUserReg): Promise<IUserReg> => {
+  registration: async (data: IUserReg): Promise<IUserSave> => {
     const user = new User(data);
     user.generateAuthToken();
     return await user.save();

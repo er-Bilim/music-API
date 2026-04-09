@@ -1,8 +1,9 @@
 import type { NextFunction, Request, Response } from 'express';
-import type { IUserReg } from '../../types/user.types.ts';
+import type { IUserReg, IUserSave } from '../../types/user.types.ts';
 import { Error } from 'mongoose';
 import UsersService from '../../services/users/users.service.ts';
 import type { RequestWithUser } from '../../middlewares/auth.ts';
+import { clearCookieToken, setCookieToken } from '../../utils/sendToken.ts';
 
 const UsersController = {
   registration: async (req: Request, res: Response, next: NextFunction) => {
@@ -15,6 +16,9 @@ const UsersController = {
 
     try {
       const user = await UsersService.registration(correctUserData);
+
+      setCookieToken(res, user.token);
+
       res.json({ message: 'Registration successful', user });
     } catch (error) {
       if (error instanceof Error.ValidationError) {
@@ -42,6 +46,8 @@ const UsersController = {
         return res.status(401).json({ error: 'Password is incorrect' });
       }
 
+      setCookieToken(res, user.token);
+
       return res.json({ message: 'Authentication successful', user });
     } catch (error) {
       next(error);
@@ -55,6 +61,8 @@ const UsersController = {
       const user = userReq.user;
 
       await UsersService.logout(user);
+
+      clearCookieToken(res, user.token);
 
       return res.json({
         message: 'Logout successfully!',

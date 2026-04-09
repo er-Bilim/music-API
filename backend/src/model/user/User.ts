@@ -1,8 +1,9 @@
 import { model, Schema, type HydratedDocument, type Model } from 'mongoose';
 import type { IUser } from '../../types/user.types.ts';
-import { randomUUID } from 'crypto';
+import jwt from 'jsonwebtoken';
 import argon2 from 'argon2';
 import type { UserMethods } from './userModel.types.ts';
+import config from '../../config.ts';
 
 type UserModel = Model<IUser, {}, UserMethods>;
 
@@ -37,7 +38,7 @@ UserSchema.pre('save', async function () {
 
 UserSchema.set('toJSON', {
   transform: (_doc, ret, _options) => {
-    const { password, __v, ...user } = ret;
+    const { password, __v, token, ...user } = ret;
     return user;
   },
 });
@@ -47,7 +48,11 @@ UserSchema.methods.checkPassword = function (password) {
 };
 
 UserSchema.methods.generateAuthToken = function () {
-  this.token = randomUUID();
+  const token = jwt.sign({ _id: this._id }, config.jwtSecret, {
+    expiresIn: '30d',
+  });
+
+  this.token = token;
 };
 
 const User = model('User', UserSchema);

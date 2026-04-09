@@ -5,4 +5,5 @@ export interface IUser {
   role: string;
 }
 
-export type IUserReg = Omit<IUser, 'token'>;
+export type IUserSave = Omit<IUser, 'role'>;
+export type IUserReg = Omit<IUser, 'role' | 'token'>;
