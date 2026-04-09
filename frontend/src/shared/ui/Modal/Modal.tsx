@@ -11,20 +11,13 @@ interface IModalProps extends PropsWithChildren {
 }
 
 const Modal: FC<IModalProps> = ({ children, handleModal }) => {
-  
   useEffect(() => {
-    const scrollY = window.scrollY;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
 
     return () => {
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      window.scrollTo(0, scrollY);
+      document.body.style.overflow = '';
     };
-  });
+  }, []);
 
   return (
     <div className={classes.modal}>

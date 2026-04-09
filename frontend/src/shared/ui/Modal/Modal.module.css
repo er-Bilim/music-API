@@ -2,7 +2,6 @@
   z-index: 1000;
   width: 850px;
   height: 550px;
-  padding: var(--space-md);
   background: black;
   border: 1px solid var(--grey-900);
   border-radius: var(--border-radius-md);
@@ -10,7 +9,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding-right: 15px;
+  overflow: hidden;
 }
 
 .modal_content {

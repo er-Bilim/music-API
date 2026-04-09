@@ -11,6 +11,8 @@ import AlbumInfo from '../../../entities/album/ui/AlbumInfo/AlbumInfo';
 import ArtistAvatar from '../../../entities/artist/ui/ArtistAvatar/ArtistAvatar';
 import ArtistName from '../../../entities/artist/ui/ArtistName/ArtistName';
 import PlayButton from '../../../features/auth/ui/playTrack/ui/PlayButton/PlayButton';
+import type { ITrack } from '../../../entities/track/model/track.types';
+import { useUserStore } from '../../../entities/user/model/userStore';
 
 const TrackList = () => {
   const {
@@ -20,6 +22,8 @@ const TrackList = () => {
     clearAlbum,
     error: albumError,
   } = useAlbumStore((state) => state);
+
+  const { user } = useUserStore((state) => state);
 
   const {
     tracks,
@@ -42,6 +46,19 @@ const TrackList = () => {
       clearTracks();
     };
   }, [getArtistAlbum, getTracks, album_id, clearAlbum, clearTracks]);
+
+  const renderPlayButton = (track: ITrack) => {
+    if (user && album && album.artist[0]) {
+      const artist = album.artist[0];
+      return (
+        <>
+          <PlayButton track={track} artist={artist} />
+        </>
+      );
+    }
+
+    return null;
+  };
 
   const renderContent = () => {
     if (fetchTrackLoading && fetchAlbumLoading) {
@@ -75,9 +92,7 @@ const TrackList = () => {
         {tracks.map((track) => (
           <div key={track._id} className={classes.tracks}>
             <TrackCard track={track} />
-            {album && album.artist && (
-              <PlayButton track={track} artist={album.artist[0]} />
-            )}
+            {renderPlayButton(track)}
           </div>
         ))}
       </>
