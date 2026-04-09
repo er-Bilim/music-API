@@ -19,6 +19,11 @@ const UserSchema = new Schema<HydratedDocument<IUser>, UserModel, UserMethods>({
   token: {
     type: String,
   },
+  role: {
+    type: String,
+    enum: ['user', 'admin'],
+    default: 'user',
+  },
 });
 
 UserSchema.pre('save', async function () {

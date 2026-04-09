@@ -31,6 +31,11 @@ const AlbumSchema = new Schema({
     required: false,
     default: null,
   },
+  isPublished: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 AlbumSchema.set('toJSON', {
