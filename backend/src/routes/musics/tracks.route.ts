@@ -30,6 +30,13 @@ tracksRouter.get(
 
 tracksRouter.post('/', auth, TrackController.create);
 
+tracksRouter.patch(
+  '/:id/togglePublished',
+  auth,
+  permit('admin'),
+  TrackController.togglePublished,
+);
+
 tracksRouter.delete('/:id', auth, permit('admin'), TrackController.delete);
 
 export default tracksRouter;

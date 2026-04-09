@@ -1,6 +1,7 @@
 import Album from '../../model/musics/Album.ts';
 import Track from '../../model/musics/Track.ts';
 import type { ITrack } from '../../types/music.types.ts';
+import togglePublishedHelper from '../helpers/togglePublished.ts';
 
 const TracksService = {
   getAll: async () => {
@@ -38,6 +39,11 @@ const TracksService = {
     track.trackNumber = lastTrack ? lastTrack.trackNumber + 1 : 1;
 
     return await track.save();
+  },
+
+  togglePublished: async (id: string) => {
+    const updatedTrack = await togglePublishedHelper(Track, id);
+    return updatedTrack;
   },
 
   delete: async (id: string) => {

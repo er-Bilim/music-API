@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import Album from '../../model/musics/Album.ts';
 import type { IAlbum } from '../../types/music.types.ts';
+import togglePublishedHelper from '../helpers/togglePublished.ts';
 
 const AlbumsService = {
   getAll: async () => {
@@ -8,11 +9,11 @@ const AlbumsService = {
     return albums;
   },
 
-  getById: async (album_id: string) => {
+  getById: async (id: string) => {
     const album = await Album.aggregate([
       {
         $match: {
-          _id: new mongoose.Types.ObjectId(album_id),
+          _id: new mongoose.Types.ObjectId(id),
         },
       },
       {
@@ -75,6 +76,11 @@ const AlbumsService = {
   create: async (data: IAlbum) => {
     const album = new Album(data);
     return await album.save();
+  },
+
+  togglePublished: async (id: string) => {
+    const updatedAlbum = await togglePublishedHelper(Album, id);
+    return updatedAlbum;
   },
 
   delete: async (id: string) => {

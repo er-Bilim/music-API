@@ -17,6 +17,13 @@ artistsRouter.post(
   ArtistController.create,
 );
 
+artistsRouter.patch(
+  '/:id/togglePublished',
+  auth,
+  permit('admin'),
+  ArtistController.togglePublished,
+);
+
 artistsRouter.delete('/:id', auth, permit('admin'), ArtistController.delete);
 
 export default artistsRouter;

@@ -60,6 +60,24 @@ const ArtistController = {
     }
   },
 
+  togglePublished: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const artist_id = req.params.id as string;
+
+      const updatedArtist = await ArtistsService.togglePublished(artist_id);
+
+      if (!updatedArtist) {
+        return res.status(404).json({
+          error: 'Artist not found',
+        });
+      }
+
+      return res.json(updatedArtist);
+    } catch (error) {
+      next(error);
+    }
+  },
+
   delete: async (req: Request, res: Response, next: NextFunction) => {
     try {
       const artist_id = req.params.id as string;

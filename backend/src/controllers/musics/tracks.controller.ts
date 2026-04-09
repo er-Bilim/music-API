@@ -82,6 +82,24 @@ const TrackController = {
     }
   },
 
+  togglePublished: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const track_id = req.params.id as string;
+
+      const updatedTrack = await TracksService.togglePublished(track_id);
+
+      if (!updatedTrack) {
+        res.status(404).json({
+          error: 'Track not found',
+        });
+      }
+
+      return res.json(updatedTrack);
+    } catch (error) {
+      next(error);
+    }
+  },
+
   delete: async (req: Request, res: Response, next: NextFunction) => {
     try {
       const track_id = req.params.id as string;

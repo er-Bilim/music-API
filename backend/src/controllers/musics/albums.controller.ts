@@ -77,6 +77,24 @@ const AlbumsController = {
     }
   },
 
+  togglePublished: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const album_id = req.params.id as string;
+
+      const updatedAlbum = await AlbumsService.togglePublished(album_id);
+
+      if (!updatedAlbum) {
+        return res.status(404).json({
+          error: 'Album not found',
+        });
+      }
+
+      return res.json(updatedAlbum);
+    } catch (error) {
+      next(error);
+    }
+  },
+
   delete: async (req: Request, res: Response, next: NextFunction) => {
     try {
       const album_id = req.params.id as string;

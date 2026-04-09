@@ -33,7 +33,6 @@ const AlbumSchema = new Schema({
   },
   isPublished: {
     type: Boolean,
-    required: false,
     default: false,
   },
 });

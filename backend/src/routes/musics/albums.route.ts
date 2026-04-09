@@ -41,6 +41,13 @@ albumsRouter.post(
   AlbumsController.create,
 );
 
+albumsRouter.patch(
+  '/:id/togglePublished',
+  auth,
+  permit('admin'),
+  AlbumsController.togglePublished,
+);
+
 albumsRouter.delete('/:id', auth, permit('admin'), AlbumsController.delete);
 
 export default albumsRouter;
