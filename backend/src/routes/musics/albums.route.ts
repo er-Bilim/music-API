@@ -6,6 +6,7 @@ import {
 } from 'express';
 import { imagesUpload } from '../../middlewares/multer.ts';
 import AlbumsController from '../../controllers/musics/albums.controller.ts';
+import auth from '../../middlewares/auth.ts';
 
 const albumsRouter = Router();
 
@@ -32,6 +33,11 @@ albumsRouter.get(
   },
 );
 
-albumsRouter.post('/', imagesUpload.single('image'), AlbumsController.create);
+albumsRouter.post(
+  '/',
+  auth,
+  imagesUpload.single('image'),
+  AlbumsController.create,
+);
 
 export default albumsRouter;

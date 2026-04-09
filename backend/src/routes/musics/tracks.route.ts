@@ -5,6 +5,7 @@ import {
   type Response,
 } from 'express';
 import TrackController from '../../controllers/musics/tracks.controller.ts';
+import auth from '../../middlewares/auth.ts';
 
 const tracksRouter = Router();
 
@@ -26,6 +27,6 @@ tracksRouter.get(
   },
 );
 
-tracksRouter.post('/', TrackController.create);
+tracksRouter.post('/', auth, TrackController.create);
 
 export default tracksRouter;
