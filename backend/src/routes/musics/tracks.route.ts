@@ -6,6 +6,7 @@ import {
 } from 'express';
 import TrackController from '../../controllers/musics/tracks.controller.ts';
 import auth from '../../middlewares/auth.ts';
+import permit from '../../middlewares/permit.ts';
 
 const tracksRouter = Router();
 
@@ -28,5 +29,7 @@ tracksRouter.get(
 );
 
 tracksRouter.post('/', auth, TrackController.create);
+
+tracksRouter.delete('/:id', auth, permit('admin'), TrackController.delete);
 
 export default tracksRouter;

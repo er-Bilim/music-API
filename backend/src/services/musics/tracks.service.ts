@@ -39,6 +39,11 @@ const TracksService = {
 
     return await track.save();
   },
+
+  delete: async (id: string) => {
+    const track = await Track.findOneAndDelete({ _id: id });
+    return track;
+  },
 };
 
 export default TracksService;

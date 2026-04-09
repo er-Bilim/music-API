@@ -16,6 +16,11 @@ const ArtistsService = {
     const artist = new Artist(data);
     return await artist.save();
   },
+
+  delete: async (id: string) => {
+    const artist = await Artist.findOneAndDelete({ _id: id });
+    return artist;
+  },
 };
 
 export default ArtistsService;

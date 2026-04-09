@@ -7,6 +7,7 @@ import {
 import { imagesUpload } from '../../middlewares/multer.ts';
 import AlbumsController from '../../controllers/musics/albums.controller.ts';
 import auth from '../../middlewares/auth.ts';
+import permit from '../../middlewares/permit.ts';
 
 const albumsRouter = Router();
 
@@ -39,5 +40,7 @@ albumsRouter.post(
   imagesUpload.single('image'),
   AlbumsController.create,
 );
+
+albumsRouter.delete('/:id', auth, permit('admin'), AlbumsController.delete);
 
 export default albumsRouter;

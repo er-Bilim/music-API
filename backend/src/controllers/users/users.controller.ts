@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from 'express';
-import type { IUserReg, IUserSave } from '../../types/user.types.ts';
+import type { IUserReg } from '../../types/user.types.ts';
 import { Error } from 'mongoose';
 import UsersService from '../../services/users/users.service.ts';
 import type { RequestWithUser } from '../../middlewares/auth.ts';

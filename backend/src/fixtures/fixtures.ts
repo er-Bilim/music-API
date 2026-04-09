@@ -23,34 +23,30 @@ const run = async () => {
     console.error(error);
   }
 
-  const admin = new User({
-    username: 'admin',
-    password: 'admin',
-    role: 'user',
-    token: '',
-  });
+  const [admin, polskyBobr, cheeseNagibator] = await User.create([
+    {
+      username: 'admin',
+      password: 'admin',
+      role: 'admin',
+    },
+    {
+      username: 'polskyBobr',
+      password: 'polskyBobr12345',
+      role: 'user',
+    },
+    {
+      username: 'cheeseNagibator',
+      password: 'cheeseNagibator12345',
+      role: 'user',
+    },
+  ]);
 
-  admin.generateAuthToken();
-  await admin.save();
-
-  const polskyBobr = new User({
-    username: 'polskyBobr',
-    password: 'polskyBobr12345',
-    role: 'user',
-    token: '',
-  });
-
-  polskyBobr.generateAuthToken();
-  await polskyBobr.save();
-
-  const cheeseNagibator = new User({
-    username: 'cheeseNagibator',
-    password: 'cheeseNagibator12345',
-    role: 'user',
-  });
-
-  cheeseNagibator.generateAuthToken();
-  await cheeseNagibator.save();
+  admin!.generateAuthToken();
+  await admin!.save();
+  polskyBobr!.generateAuthToken();
+  await polskyBobr!.save();
+  cheeseNagibator!.generateAuthToken();
+  await cheeseNagibator!.save();
 
   const [metro_boomin, the_weeknd, dominic_fike] = await Artist.create(
     {

@@ -76,6 +76,11 @@ const AlbumsService = {
     const album = new Album(data);
     return await album.save();
   },
+
+  delete: async (id: string) => {
+    const album = await Album.findOneAndDelete({ _id: id });
+    return album;
+  },
 };
 
 export default AlbumsService;

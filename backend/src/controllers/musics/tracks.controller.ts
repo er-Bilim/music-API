@@ -2,6 +2,7 @@ import type { NextFunction, Request, Response } from 'express';
 import TracksService from '../../services/musics/tracks.service.ts';
 import type { ITrack } from '../../types/music.types.ts';
 import { Error, isValidObjectId } from 'mongoose';
+import deleteImage from '../../utils/deleteImage.ts';
 
 const TrackController = {
   getAll: async (_req: Request, res: Response, next: NextFunction) => {
@@ -77,6 +78,26 @@ const TrackController = {
           error,
         });
       }
+      next(error);
+    }
+  },
+
+  delete: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const track_id = req.params.id as string;
+
+      const track = await TracksService.delete(track_id);
+
+      if (track) {
+        return res.status(404).json({
+          error: 'Track not found',
+        });
+      }
+
+      return res.json({
+        message: 'Track deleted successfully',
+      });
+    } catch (error) {
       next(error);
     }
   },

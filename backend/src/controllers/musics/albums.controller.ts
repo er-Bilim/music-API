@@ -42,7 +42,7 @@ const AlbumsController = {
   },
 
   getArtistAlbums: async (_req: Request, res: Response, artist_id: string) => {
-    const artistAlbums = await AlbumsService.getArtistAlbums(artist_id);    
+    const artistAlbums = await AlbumsService.getArtistAlbums(artist_id);
 
     if (artistAlbums.length === 0) {
       return res.status(404).json({
@@ -66,13 +66,35 @@ const AlbumsController = {
       const album = await AlbumsService.create(correctAlbumData);
       return res.json(album);
     } catch (error) {
-      await deleteImage(correctAlbumData, req);
+      await deleteImage(correctAlbumData);
       if (error instanceof Error.ValidationError) {
         res.status(400).json({
           error,
         });
       }
 
+      next(error);
+    }
+  },
+
+  delete: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const album_id = req.params.id as string;
+
+      const album = await AlbumsService.delete(album_id);
+
+      if (!album) {
+        return res.status(404).json({
+          error: 'Album not found',
+        });
+      }
+
+      await deleteImage({ image: album.image });
+
+      return res.json({
+        message: 'Album deleted successfully',
+      });
+    } catch (error) {
       next(error);
     }
   },

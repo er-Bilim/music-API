@@ -10,27 +10,35 @@ export interface RequestWithUser extends Request {
 }
 
 const auth = async (expressReq: Request, res: Response, next: NextFunction) => {
-  const req = expressReq as RequestWithUser;
-  const token = req.cookies.token;
+  try {
+    const req = expressReq as RequestWithUser;
+    const token = req.cookies.token;
+    
+    if (!token) {
+      return res.status(401).json({
+        error: 'Access denied. No token provided',
+      });
+    }
 
-  if (!token) {
-    return res.status(401).json({
-      error: 'Access denied. No token provided',
-    });
+    const decoded = jwt.verify(token, config.jwtSecret) as { _id: string };
+    
+    const user = await User.findOne({ _id: decoded._id, token });
+
+    if (!user) {
+      return res.status(403).json({
+        error: 'Access denied. Invalid token',
+      });
+    }
+
+    req.user = user;
+    next();
+  } catch (error) {
+    if (error instanceof jwt.TokenExpiredError) {
+      return res.status(401).json({
+        error: 'Token expired',
+      });
+    }
   }
-
-  const decoded = jwt.verify(token, config.jwtSecret) as { _id: string };
-
-  const user = await User.findOne({ _id: decoded._id, token });
-
-  if (!user) {
-    return res.status(403).json({
-      error: 'Access denied. Invalid token',
-    });
-  }
-
-  req.user = user;
-  next();
 };
 
 export default auth;
