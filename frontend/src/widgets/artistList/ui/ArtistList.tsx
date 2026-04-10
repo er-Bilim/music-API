@@ -5,8 +5,11 @@ import classes from './ArtistList.module.css';
 import Loader from '../../../shared/ui/Loader/Loader';
 import { Link } from 'react-router-dom';
 import Title from '../../../shared/ui/Title/Title';
+import { useUserStore } from '../../../entities/user/model/userStore';
+import Status from '../../../shared/ui/Status/Status';
 
 const ArtistList = () => {
+  const { user } = useUserStore((state) => state);
   const { artists, fetchLoading, getArtists, clearArtists, error } =
     useArtistStore((state) => state);
 
@@ -17,6 +20,16 @@ const ArtistList = () => {
       clearArtists();
     };
   }, [getArtists, clearArtists]);
+
+  const renderStatus = (status: boolean) => {
+    if (user && user.user.role === 'admin') {
+      return (
+        <>
+          <Status status={status} />
+        </>
+      );
+    }
+  };
 
   const renderContent = () => {
     if (fetchLoading) {
@@ -50,6 +63,7 @@ const ArtistList = () => {
         {artists.map((artist) => (
           <Link to={`/albums?artist=${artist._id}`} key={artist._id}>
             <ArtistCard artist={artist} />
+            {renderStatus(artist.isPublished)}
           </Link>
         ))}
       </>

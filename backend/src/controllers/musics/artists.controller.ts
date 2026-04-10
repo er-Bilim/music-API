@@ -3,11 +3,15 @@ import ArtistsService from '../../services/musics/artists.service.ts';
 import type { IArtist } from '../../types/music.types.ts';
 import { Error } from 'mongoose';
 import deleteImage from '../../utils/deleteImage.ts';
+import type { RequestOptionalUser } from '../../middlewares/optionalAuth.ts';
 
 const ArtistController = {
-  getAll: async (_req: Request, res: Response, next: NextFunction) => {
+  getAll: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const artists = await ArtistsService.getAll();
+      const userReq = req as RequestOptionalUser;
+      const role = userReq.user?.role || 'guest';
+
+      const artists = await ArtistsService.getAll(role);
       return res.json(artists);
     } catch (error) {
       return next(error);
@@ -48,7 +52,10 @@ const ArtistController = {
 
     try {
       const artistData = await ArtistsService.create(correctArtistData);
-      return res.json(artistData);
+      return res.json({
+        message: 'The artist has been successfully created',
+        artistData,
+      });
     } catch (error) {
       if (error instanceof Error.ValidationError) {
         res.status(400).json({

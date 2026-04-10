@@ -39,6 +39,10 @@ const UsersService = {
     const user = await User.findOne({ token });
     return user;
   },
+
+  // getRole: async (user: IUser): Promise<void> => {
+  //   const 
+  // }
 };
 
 export default UsersService;

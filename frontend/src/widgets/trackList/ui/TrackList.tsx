@@ -10,9 +10,10 @@ import AlbumCover from '../../../entities/album/ui/AlbumCover/AlbumCover';
 import AlbumInfo from '../../../entities/album/ui/AlbumInfo/AlbumInfo';
 import ArtistAvatar from '../../../entities/artist/ui/ArtistAvatar/ArtistAvatar';
 import ArtistName from '../../../entities/artist/ui/ArtistName/ArtistName';
-import PlayButton from '../../../features/auth/ui/playTrack/ui/PlayButton/PlayButton';
+import PlayButton from '../../../features/playTrack/ui/PlayButton/PlayButton';
 import type { ITrack } from '../../../entities/track/model/track.types';
 import { useUserStore } from '../../../entities/user/model/userStore';
+import Status from '../../../shared/ui/Status/Status';
 
 const TrackList = () => {
   const {
@@ -46,6 +47,16 @@ const TrackList = () => {
       clearTracks();
     };
   }, [getArtistAlbum, getTracks, album_id, clearAlbum, clearTracks]);
+
+  const renderStatus = (status: boolean) => {
+    if (user && user.user.role === 'admin') {
+      return (
+        <>
+          <Status status={status} />
+        </>
+      );
+    }
+  };
 
   const renderPlayButton = (track: ITrack) => {
     if (user && album && album.artist[0]) {
@@ -91,8 +102,11 @@ const TrackList = () => {
       <>
         {tracks.map((track) => (
           <div key={track._id} className={classes.tracks}>
-            <TrackCard track={track} />
-            {renderPlayButton(track)}
+            <div className={classes.track_action}>
+              <TrackCard track={track} />
+              {renderPlayButton(track)}
+            </div>
+            <div className={classes.status}>{renderStatus(track.isPublished)}</div>
           </div>
         ))}
       </>

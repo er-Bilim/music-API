@@ -5,4 +5,5 @@ export interface ITrack {
   time: string;
   trackNumber: number;
   youtubeLink: string | null;
+  isPublished: boolean;
 }

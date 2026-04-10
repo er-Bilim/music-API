@@ -4,8 +4,10 @@ import type { IAlbum } from '../../types/music.types.ts';
 import togglePublishedHelper from '../helpers/togglePublished.ts';
 
 const AlbumsService = {
-  getAll: async () => {
-    const albums = await Album.find();
+  getAll: async (role: string) => {
+    const albums = await Album.find(
+      role === 'admin' ? {} : { isPublished: true },
+    );
     return albums;
   },
 

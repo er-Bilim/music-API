@@ -6,6 +6,7 @@ const ArtistSchema = new Schema({
     required: true,
     unique: true,
     min: 1,
+    max: 55,
     validate: {
       validator: async (name: string) => {
         const artist = await Artist.findOne({ name });
@@ -25,6 +26,7 @@ const ArtistSchema = new Schema({
   },
   information: {
     type: String,
+    max: 500,
     required: false,
     default: null,
   },

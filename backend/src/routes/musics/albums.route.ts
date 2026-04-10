@@ -8,11 +8,13 @@ import { imagesUpload } from '../../middlewares/multer.ts';
 import AlbumsController from '../../controllers/musics/albums.controller.ts';
 import auth from '../../middlewares/auth.ts';
 import permit from '../../middlewares/permit.ts';
+import optionalAuth from '../../middlewares/optionalAuth.ts';
 
 const albumsRouter = Router();
 
 albumsRouter.get(
   '/',
+  optionalAuth,
   async (req: Request, res: Response, next: NextFunction) => {
     const artist_id = req.query.artist as string;
 

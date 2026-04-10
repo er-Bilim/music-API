@@ -4,8 +4,10 @@ import type { ITrack } from '../../types/music.types.ts';
 import togglePublishedHelper from '../helpers/togglePublished.ts';
 
 const TracksService = {
-  getAll: async () => {
-    const tracks = await Track.find().select('-__v');
+  getAll: async (role: string) => {
+    const tracks = await Track.find(
+      role === 'admin' ? {} : { isPublished: true },
+    ).select('-__v');
     return tracks;
   },
 

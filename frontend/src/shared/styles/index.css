@@ -27,6 +27,10 @@ body {
   transform: translate(-50%, -50%);
 }
 
+html {
+  overflow-y: scroll;
+}
+
 section {
   margin: var(--space-3xl) 0 var(--space-3xl);
 }

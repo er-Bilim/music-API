@@ -3,8 +3,10 @@ import type { IArtist } from '../../types/music.types.ts';
 import togglePublishedHelper from '../helpers/togglePublished.ts';
 
 const ArtistsService = {
-  getAll: async () => {
-    const artists = await Artist.find().select('-__v');
+  getAll: async (role: string) => {
+    const artists = await Artist.find(
+      role === 'admin' ? {} : { isPublished: true },
+    ).select('-__v');
     return artists;
   },
 

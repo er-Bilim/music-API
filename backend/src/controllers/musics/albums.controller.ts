@@ -3,11 +3,16 @@ import AlbumsService from '../../services/musics/albums.service.ts';
 import type { IAlbum } from '../../types/music.types.ts';
 import deleteImage from '../../utils/deleteImage.ts';
 import { Error, isValidObjectId } from 'mongoose';
+import type { RequestOptionalUser } from '../../middlewares/optionalAuth.ts';
 
 const AlbumsController = {
-  getAll: async (_req: Request, res: Response, next: NextFunction) => {
+  getAll: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const albums = await AlbumsService.getAll();
+      const reqUser = req as RequestOptionalUser;
+
+      const role = reqUser.user?.role || 'guest';
+
+      const albums = await AlbumsService.getAll(role);
       return res.json(albums);
     } catch (error) {
       next(error);

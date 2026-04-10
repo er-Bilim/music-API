@@ -2,12 +2,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import classes from './PlayButton.module.css';
 import { useState, type FC } from 'react';
-import Modal from '../../../../../../shared/ui/Modal/Modal';
+import Modal from '../../../../shared/ui/Modal/Modal';
 import ReactPlayer from 'react-player';
-import type { ITrack } from '../../../../../../entities/track/model/track.types';
-import type { IArtist } from '../../../../../../entities/artist/model/artist.types';
+import type { ITrack } from '../../../../entities/track/model/track.types';
+import type { IArtist } from '../../../../entities/artist/model/artist.types';
 import { usePlayerState } from '../../model/usePlayerStore';
-import Backdrop from '../../../../../../shared/ui/Backdrop/Backdrop';
+import Backdrop from '../../../../shared/ui/Backdrop/Backdrop';
 
 interface IPlayButtonProps {
   track: ITrack;

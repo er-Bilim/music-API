@@ -1,0 +1,79 @@
+textarea {
+  min-height: 100px;
+  max-height: 200px;
+}
+
+.form_block {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  background: var(--grey-50);
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--grey-900);
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.form_icon {
+  font-size: var(--font-size-2xl);
+  color: var(--pink-500);
+}
+
+.form_input_label {
+  margin-bottom: var(--space-md);
+}
+
+.form_input_error {
+  color: var(--pink-500);
+  font-size: var(--font-size-sm);
+  padding: var(--space-sm);
+}
+
+.form_inputs_block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  text-align: left;
+}
+
+.form_input_file {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form_input_content {
+  width: 550px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.form_input {
+  min-width: 100%;
+  max-width: 100%;
+  padding: var(--space-md);
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--grey-900);
+}
+
+.form_submit_button {
+  cursor: pointer;
+  width: 100%;
+  padding: var(--space-md);
+  border-radius: var(--border-radius-sm);
+  border: none;
+  background: var(--pink-500);
+  color: var(--white);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--grey-50);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.form_input_button:disabled {
+  background: var(--grey-500);
+  cursor: not-allowed;
+}

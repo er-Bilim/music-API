@@ -3,7 +3,6 @@ import type { ITrackHistory } from './trackHistory.types';
 import { create } from 'zustand';
 import type { IGlobalError } from '../../../shared/types/error.types';
 import { serviceGetTrackHistory } from '../service/trackHistory.service';
-import { useUserStore } from '../../user/model/userStore';
 import { parseApiError } from '../../../shared/api/error/normalizeResError';
 
 interface ITrackHistoryState {
@@ -30,15 +29,11 @@ export const useTrackHistoryStore = create<ITrackHistoryState>()(
           fetchError: null,
         });
         try {
-          const token = useUserStore.getState().user?.user.token;
-
-          if (token) {
-            const history = await serviceGetTrackHistory(token);
-            set({
-              trackHistory: history,
-              fetchLoading: false,
-            });
-          }
+          const history = await serviceGetTrackHistory();
+          set({
+            trackHistory: history,
+            fetchLoading: false,
+          });
         } catch (error) {
           set({
             fetchLoading: false,

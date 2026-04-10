@@ -9,6 +9,7 @@ import LoginPage from './pages/login/LoginPage';
 import TrackHistoryPage from './pages/track/TrackHistoryPage';
 import { useUserStore } from './entities/user/model/userStore';
 import ProtectedRouter from './app/providers/router/ProtectedRoute';
+import CreateArtistPage from './pages/createArtist/CreateArtistPage';
 
 const App = () => {
   const { user } = useUserStore((state) => state);
@@ -25,6 +26,14 @@ const App = () => {
             element={
               <ProtectedRouter isAuth={Boolean(user)}>
                 <TrackHistoryPage />
+              </ProtectedRouter>
+            }
+          ></Route>
+          <Route
+            path="/create-artist"
+            element={
+              <ProtectedRouter isAuth={Boolean(user)}>
+                <CreateArtistPage />
               </ProtectedRouter>
             }
           ></Route>

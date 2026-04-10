@@ -4,7 +4,7 @@ import ArtistAvatar from '../ArtistAvatar/ArtistAvatar';
 import ArtistName from '../ArtistName/ArtistName';
 import classes from './ArtistCard.module.css';
 import { motion } from 'motion/react';
-import { animationConfigAvatar, animationConfigCard } from './animation';
+import { animationConfigAvatar } from './animation';
 
 interface IArtistCardProps {
   artist: IArtist;
@@ -13,7 +13,7 @@ interface IArtistCardProps {
 const ArtistCard: FC<IArtistCardProps> = ({ artist }) => {
   return (
     <>
-      <motion.div className={classes.artist_card} {...animationConfigCard}>
+      <div className={classes.artist_card}>
         <motion.div
           className={classes.artist_avatar_block}
           {...animationConfigAvatar}
@@ -25,7 +25,7 @@ const ArtistCard: FC<IArtistCardProps> = ({ artist }) => {
         <div className={classes.artist_info}>
           <ArtistName name={artist.name} />
         </div>
-      </motion.div>
+      </div>
     </>
   );
 };

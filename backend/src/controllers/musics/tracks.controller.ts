@@ -2,12 +2,16 @@ import type { NextFunction, Request, Response } from 'express';
 import TracksService from '../../services/musics/tracks.service.ts';
 import type { ITrack } from '../../types/music.types.ts';
 import { Error, isValidObjectId } from 'mongoose';
-import deleteImage from '../../utils/deleteImage.ts';
+import type { RequestOptionalUser } from '../../middlewares/optionalAuth.ts';
 
 const TrackController = {
-  getAll: async (_req: Request, res: Response, next: NextFunction) => {
+  getAll: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const tracks = await TracksService.getAll();
+      const reqUser = req as RequestOptionalUser;
+
+      const role = reqUser.user?.role || 'guest';
+
+      const tracks = await TracksService.getAll(role);
       res.json(tracks);
     } catch (error) {
       next(error);

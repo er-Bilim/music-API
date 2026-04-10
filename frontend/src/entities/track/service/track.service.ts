@@ -7,3 +7,4 @@ export const getTracks = async (album_id: string): Promise<ITrack[]> => {
 
   return data;
 };
+

@@ -16,10 +16,7 @@ export const login = async (data: ILogin): Promise<IUser> => {
   return userData;
 };
 
-export const logout = async (user: IUser): Promise<void> => {
-  const token = user.user.token;
-  const response = await axiosApi.delete('/users/sessions', {
-    headers: { Authorization: token },
-  });
+export const logout = async (): Promise<void> => {
+  const response = await axiosApi.delete('/users/sessions');
   toast.success(response.data.message);
 };

@@ -17,6 +17,18 @@ const UserMenu = () => {
             track history
           </NavLink>
         </li>
+        <li className={classes.nav_item}>
+          <NavLink
+            to={'/create-artist'}
+            className={({ isActive }) =>
+              isActive
+                ? `${classes.nav_item_link} ${classes.active}`
+                : `${classes.nav_item_link}`
+            }
+          >
+            create artist
+          </NavLink>
+        </li>
       </ul>
     </>
   );

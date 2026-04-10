@@ -7,11 +7,13 @@ import {
 import TrackController from '../../controllers/musics/tracks.controller.ts';
 import auth from '../../middlewares/auth.ts';
 import permit from '../../middlewares/permit.ts';
+import optionalAuth from '../../middlewares/optionalAuth.ts';
 
 const tracksRouter = Router();
 
 tracksRouter.get(
   '/',
+  optionalAuth,
   async (req: Request, res: Response, next: NextFunction) => {
     const album_id = req.query.album as string;
     const artist_id = req.query.artist as string;

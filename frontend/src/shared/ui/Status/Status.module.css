@@ -1,0 +1,22 @@
+.status {
+  width: 100%;
+  text-align: center;
+  border: 1px solid var(--grey-900);
+  border-radius: var(--border-radius-sm);
+  padding: var(--space-sm) var(--space-md);
+  display: inline-block;
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-md);
+}
+
+.published {
+  color: var(--green-500);
+  background: var(--green-100);
+  border: 1px solid var(--green-500);
+}
+
+.not_published {
+  color: var(--red-500);
+  background: var(--red-100);
+  border: 1px solid var(--red-500);
+}

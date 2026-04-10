@@ -68,7 +68,7 @@ export const useUserStore = create<IUserState>()(
               set({
                 user: null,
               });
-              await logout(user);
+              await logout();
             }
           } catch (error) {
             console.error(error);

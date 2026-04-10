@@ -7,4 +7,5 @@ export interface IAlbum {
   release_year: number;
   image: string;
   trackCount: number;
+  isPublished: boolean;
 }

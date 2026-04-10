@@ -8,14 +8,19 @@ import Title from '../../../shared/ui/Title/Title';
 import ArtistAvatar from '../../../entities/artist/ui/ArtistAvatar/ArtistAvatar';
 import { useArtistStore } from '../../../entities/artist/model/artistStore';
 import ArtistName from '../../../entities/artist/ui/ArtistName/ArtistName';
+import { useUserStore } from '../../../entities/user/model/userStore';
+import Status from '../../../shared/ui/Status/Status';
 
 const AlbumList = () => {
+  const { user } = useUserStore((state) => state);
+
   const {
     albums,
     fetchLoading: albumLoading,
     getArtistAlbums,
     clearAlbums,
   } = useAlbumStore((state) => state);
+
   const {
     artist,
     getArtist,
@@ -39,6 +44,16 @@ const AlbumList = () => {
       clearAlbums();
     };
   }, [getArtist, getArtistAlbums, clearArtist, clearAlbums, artist_id]);
+
+  const renderStatus = (status: boolean) => {
+    if (user && user.user.role === 'admin') {
+      return (
+        <>
+          <Status status={status} />
+        </>
+      );
+    }
+  };
 
   const renderContent = () => {
     if (albumLoading && artistLoading) {
@@ -72,6 +87,7 @@ const AlbumList = () => {
         {albums.map((album) => (
           <Link to={`/tracks?album=${album._id}`} key={album._id}>
             <AlbumCard album={album} />
+            {renderStatus(album.isPublished)}
           </Link>
         ))}
       </>
