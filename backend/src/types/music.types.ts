@@ -8,6 +8,7 @@ export interface IAlbum {
   artist_id: string;
   name: string;
   image: string | null;
+  release_year: number;
 }
 
 export interface ITrack {

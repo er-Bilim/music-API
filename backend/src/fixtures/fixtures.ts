@@ -51,7 +51,7 @@ const run = async () => {
   const [metro_boomin, the_weeknd, dominic_fike] = await Artist.create(
     {
       name: 'Metro Boomin',
-      image: `${fixtureImagesPath}/artists/metro_boomin.jpg`,
+      image: `${fixtureImagesPath}/artists/metro_boomin.png`,
       information:
         'Leland Tyler Wayne (born September 16, 1993), professionally known as Metro Boomin (also known as Young Metro or simply Metro), is an Atlanta-based record producer and record executive from St. Louis, Missouri. Having expressed an interest for beat-making in his early teens.',
       isPublished: true,

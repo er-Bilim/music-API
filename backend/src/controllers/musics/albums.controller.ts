@@ -64,12 +64,16 @@ const AlbumsController = {
     const correctAlbumData: IAlbum = {
       artist_id: body.artist_id,
       name: body.name,
+      release_year: Number(body.release_year),
       image: req.file ? `images/${req.file.filename}` : null,
     };
 
     try {
       const album = await AlbumsService.create(correctAlbumData);
-      return res.json(album);
+      return res.json({
+        message: 'The album has been successfully created',
+        album,
+      });
     } catch (error) {
       await deleteImage(correctAlbumData);
       if (error instanceof Error.ValidationError) {
