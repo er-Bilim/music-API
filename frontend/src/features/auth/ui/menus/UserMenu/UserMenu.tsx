@@ -3,15 +3,12 @@ import classes from './UserMenu.module.css';
 import { motion } from 'motion/react';
 import { animationButton } from '../animation';
 
-const NavLinkMotion = motion.create(NavLink);
-
 const UserMenu = () => {
   return (
     <>
-      <ul className={classes.nav_items}>
-        <li className={classes.nav_item}>
-          <NavLinkMotion
-            {...animationButton}
+      <motion.ul className={classes.nav_items}>
+        <motion.li className={classes.nav_item} {...animationButton}>
+          <NavLink
             to={'/track-history'}
             className={({ isActive }) =>
               isActive
@@ -20,11 +17,10 @@ const UserMenu = () => {
             }
           >
             track history
-          </NavLinkMotion>
-        </li>
-        <li className={classes.nav_item}>
-          <NavLinkMotion
-            {...animationButton}
+          </NavLink>
+        </motion.li>
+        <motion.li className={classes.nav_item} {...animationButton}>
+          <NavLink
             to={'/create-artist'}
             className={({ isActive }) =>
               isActive
@@ -33,11 +29,10 @@ const UserMenu = () => {
             }
           >
             create artist
-          </NavLinkMotion>
-        </li>
-        <li className={classes.nav_item}>
-          <NavLinkMotion
-            {...animationButton}
+          </NavLink>
+        </motion.li>
+        <motion.li className={classes.nav_item} {...animationButton}>
+          <NavLink
             to={'/create-album'}
             className={({ isActive }) =>
               isActive
@@ -46,11 +41,10 @@ const UserMenu = () => {
             }
           >
             create album
-          </NavLinkMotion>
-        </li>
-        <li className={classes.nav_item}>
-          <NavLinkMotion
-            {...animationButton}
+          </NavLink>
+        </motion.li>
+        <motion.li className={classes.nav_item} {...animationButton}>
+          <NavLink
             to={'/create-track'}
             className={({ isActive }) =>
               isActive
@@ -59,9 +53,9 @@ const UserMenu = () => {
             }
           >
             create track
-          </NavLinkMotion>
-        </li>
-      </ul>
+          </NavLink>
+        </motion.li>
+      </motion.ul>
     </>
   );
 };

@@ -13,9 +13,12 @@ import Title from '../../../../shared/ui/Title/Title';
 import FileInput from '../../../../shared/ui/FileInput/FileInput';
 import type { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Alert from '../../../../shared/ui/Alert/Alert';
 
 const CreateArtistForm = () => {
-  const { createArtist, createLoading } = useArtistStore((state) => state);
+  const { createArtist, createLoading, createError } = useArtistStore(
+    (state) => state,
+  );
   const navigate = useNavigate();
 
   const {
@@ -55,19 +58,21 @@ const CreateArtistForm = () => {
         <div className={classes.form_title}>
           <Title title="Create Artist" />
         </div>
-
+        {createError && createError.errors.name.message && (
+          <Alert type="error" message={createError.errors.name.message} />
+        )}
         <form onSubmit={handleSubmit(createArtistSubmit)}>
           <div className={classes.form_inputs_block}>
             <div className={classes.form_input_content}>
               <label htmlFor="name" className={classes.form_input_label}>
-                Username
+                Name
               </label>
               <input
                 id="name"
                 className={classes.form_input}
                 type="text"
                 {...register('name')}
-                placeholder="Username"
+                placeholder="Name"
               />
               {errors.name && (
                 <p className={classes.form_input_error}>
@@ -84,7 +89,7 @@ const CreateArtistForm = () => {
                 className={classes.form_input}
                 type="text"
                 {...register('information')}
-                placeholder="information"
+                placeholder="Information"
               />
               {errors.information && (
                 <p className={classes.form_input_error}>
@@ -94,7 +99,10 @@ const CreateArtistForm = () => {
             </div>
 
             <div className={classes.form_input_content}>
-              <label htmlFor="artist_photo" className={classes.form_input_label}>
+              <label
+                htmlFor="artist_photo"
+                className={classes.form_input_label}
+              >
                 Artist photo
               </label>
               <div className={classes.form_input_file}>

@@ -12,7 +12,7 @@ export interface ITrackMutation {
   album_id: string;
   name: string;
   time: string;
-  youtubeLink: string | null;
+  youtubeLink?: string | null;
 }
 
 export interface ICreatedTrack {

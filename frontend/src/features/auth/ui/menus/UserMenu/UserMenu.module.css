@@ -14,7 +14,7 @@
   width: 100%;
   display: block;
   font-size: var(--font-size-md);
-  color: var(--blueGrey-900);
+  color: inherit;
   padding: var(--space-sm) 0;
 }
 

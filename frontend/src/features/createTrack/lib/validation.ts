@@ -19,7 +19,10 @@ export const schemaCreateTrack = z.object({
     .regex(
       /^https:\/\/(www\.)?youtube\.com\/|^https:\/\/youtu\.be\//,
       'Only youtube link (for example, https://www.youtube.com/example)',
-    ),
+    )
+    .optional()
+    .nullable()
+    .or(z.literal(''))
 });
 
 export type CreateTrackFormData = z.infer<typeof schemaCreateTrack>;

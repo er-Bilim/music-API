@@ -35,7 +35,7 @@ const HistoryList = () => {
     return (
       <>
         {trackHistory.map((history) => (
-          <HistoryCard history={history} />
+          <HistoryCard history={history} key={history._id} />
         ))}
       </>
     );

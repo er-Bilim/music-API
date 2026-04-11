@@ -14,7 +14,7 @@ export interface IArtistShow {
 
 export interface IArtistMutation {
   name: string;
-  image: File | null;
+  image?: File | null;
   information: string;
 }
 

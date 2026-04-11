@@ -20,7 +20,9 @@ export const schemaCreateArtist = z.object({
     .refine(
       (file) => ACCEPTED_IMAGE_TYPES.includes(file.type),
       'Only .jpg, .jpeg, .png and .webp formats are supported 😶',
-    ),
+    )
+    .optional()
+    .nullable(),
 });
 
 export type CreateArtistFormData = z.infer<typeof schemaCreateArtist>;
