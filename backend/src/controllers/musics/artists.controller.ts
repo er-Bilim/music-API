@@ -57,10 +57,9 @@ const ArtistController = {
         artistData,
       });
     } catch (error) {
+      await deleteImage(correctArtistData);
       if (error instanceof Error.ValidationError) {
-        res.status(400).json({
-          error,
-        });
+        res.status(400).json(error);
       }
 
       return next(error);

@@ -3,6 +3,7 @@ import type { ITrackHistory } from '../../types/music.types.ts';
 import TrackHistoryService from '../../services/musics/trackHistory.service.ts';
 import { Error } from 'mongoose';
 import type { RequestWithUser } from '../../middlewares/auth.ts';
+import type deleteImage from '../../utils/deleteImage.ts';
 
 const TrackHistoryController = {
   getAll: async (req: Request, res: Response, next: NextFunction) => {
@@ -27,23 +28,19 @@ const TrackHistoryController = {
 
   create: async (req: Request, res: Response, next: NextFunction) => {
     const body: ITrackHistory = req.body;
-    const reqUser = req as RequestWithUser;
 
     try {
-      const user = reqUser.user;
+      const { user } = req as RequestWithUser;
       const correctData = {
         user: user.id,
         track: body.track,
         artist: body.artist,
       };
       const trackHistory = await TrackHistoryService.create(correctData);
-
       return res.json({ message: 'listen listen', trackHistory });
     } catch (error) {
       if (error instanceof Error.ValidationError) {
-        return res.status(400).json({
-          error,
-        });
+        return res.status(400).json(error);
       }
       next(error);
     }

@@ -78,9 +78,7 @@ const TrackController = {
       return res.json({ message: 'The track was created successfully', track });
     } catch (error) {
       if (error instanceof Error.ValidationError) {
-        res.status(400).json({
-          error,
-        });
+        res.status(400).json(error);
       }
       next(error);
     }

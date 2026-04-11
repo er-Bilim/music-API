@@ -77,9 +77,7 @@ const AlbumsController = {
     } catch (error) {
       await deleteImage(correctAlbumData);
       if (error instanceof Error.ValidationError) {
-        res.status(400).json({
-          error,
-        });
+        res.status(400).json(error);
       }
 
       next(error);
