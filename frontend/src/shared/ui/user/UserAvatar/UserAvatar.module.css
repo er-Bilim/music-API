@@ -1,21 +1,19 @@
 .avatar_block {
-  position: relative;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   border-radius: var(--circular);
-  background: var(--grey-100);
-  border: 1px solid var(--grey-900);
+  background: var(--pink-500);
+  border: 1px solid var(--pink-500);
   overflow: hidden;
 }
 
 .avatar {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: inline-block;
-  text-transform: uppercase;
+  width: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 29px;
   font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  color: var(--grey-900);
+  color: var(--grey-50);
+  text-transform: uppercase;
 }

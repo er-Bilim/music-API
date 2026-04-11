@@ -1,6 +1,5 @@
 .title {
-  font-size: var(--font-size-lg);
+  font-size: 'inherit';
   font-weight: var(--font-weight-bold);
   text-transform: uppercase;
-  margin-bottom: var(--space-lg);
 }

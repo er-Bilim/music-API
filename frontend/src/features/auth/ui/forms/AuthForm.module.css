@@ -12,7 +12,7 @@
 
 .form_icon {
   font-size: var(--font-size-display);
-  color: var(--grey-900);
+  color: var(--pink-500);
   text-align: center;
   margin-bottom: var(--space-md);
 }
@@ -51,10 +51,14 @@
   padding: var(--space-md);
   border: none;
   border-radius: var(--border-radius-md);
-  background: var(--grey-900);
-  color: var(--blueGrey-100);
-  font-size: var(--font-size-md);
+  background: var(--pink-500);
+  color: var(--grey-50);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 6px;
   cursor: pointer;
+  margin-top: var(--space-md);
 }
 
 .form_input_error {

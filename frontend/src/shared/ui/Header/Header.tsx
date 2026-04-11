@@ -9,14 +9,19 @@ const Header = () => {
       <header className={classes.header}>
         <Container>
           <div className={classes.header_content}>
-            <Link to={'/'} className={classes.logo_name}>
-              Music
+            <Link to={'/'} className={classes.logo}>
+              <img
+                src="/music_logo.png"
+                alt="logo"
+                className={classes.logo_image}
+              />
+              <p className={classes.logo_name}>Music</p>
             </Link>
           </div>
-          <div className={classes.header_menu}>
-            <AuthMenu />
-          </div>
         </Container>
+        <div className={classes.header_menu}>
+          <AuthMenu />
+        </div>
       </header>
     </>
   );

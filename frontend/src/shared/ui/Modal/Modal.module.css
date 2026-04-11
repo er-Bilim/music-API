@@ -3,7 +3,7 @@
   width: 850px;
   height: 550px;
   background: black;
-  border: 1px solid var(--grey-900);
+  border: 4px solid var(--pink-500);
   border-radius: var(--border-radius-md);
   position: fixed;
   top: 50%;

@@ -1,12 +1,31 @@
 .track_history {
-  margin-top: var(--space-4xl);
+  margin-top: var(--space-3xl);
 }
 
-.track_history_list {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  row-gap: var(--space-xl);
-  flex-wrap: wrap;
+.table {
+  margin-top: var(--space-lg);
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table_header {
+  display: table-header-group;
+  font-weight: bold;
+  background-color: var(--pink-500);
+  color: var(--grey-50);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+.table_body {
+  display: table-row-group;
+}
+
+.table_cell {
+  display: table-cell;
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+  padding: var(--space-sm) var(--space-lg);
 }

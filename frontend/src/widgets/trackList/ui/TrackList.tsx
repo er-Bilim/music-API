@@ -7,13 +7,14 @@ import classes from './TrackList.module.css';
 import { useSearchParams } from 'react-router-dom';
 import { useAlbumStore } from '../../../entities/album/model/albumStore';
 import AlbumCover from '../../../entities/album/ui/AlbumCover/AlbumCover';
-import AlbumInfo from '../../../entities/album/ui/AlbumInfo/AlbumInfo';
 import ArtistAvatar from '../../../entities/artist/ui/ArtistAvatar/ArtistAvatar';
 import ArtistName from '../../../entities/artist/ui/ArtistName/ArtistName';
 import PlayButton from '../../../features/playTrack/ui/PlayButton/PlayButton';
 import type { ITrack } from '../../../entities/track/model/track.types';
 import { useUserStore } from '../../../entities/user/model/userStore';
 import Status from '../../../shared/ui/Status/Status';
+import AlbumName from '../../../entities/album/ui/AlbumName/AlbumName';
+import AlbumReleaseYear from '../../../entities/album/ui/AlbumReleaseYear/AlbumReleaseYear';
 
 const TrackList = () => {
   const {
@@ -62,9 +63,9 @@ const TrackList = () => {
     if (user && album && album.artist[0]) {
       const artist = album.artist[0];
       return (
-        <>
+        <div className={classes.play_button}>
           <PlayButton track={track} artist={artist} />
-        </>
+        </div>
       );
     }
 
@@ -101,12 +102,14 @@ const TrackList = () => {
     return (
       <>
         {tracks.map((track) => (
-          <div key={track._id} className={classes.tracks}>
-            <div className={classes.track_action}>
+          <div key={track._id} className={classes.track_card}>
+            <div className={classes.track_card_action}>
               <TrackCard track={track} />
               {renderPlayButton(track)}
             </div>
-            <div className={classes.status}>{renderStatus(track.isPublished)}</div>
+            <div className={classes.status}>
+              {renderStatus(track.isPublished)}
+            </div>
           </div>
         ))}
       </>
@@ -115,42 +118,57 @@ const TrackList = () => {
 
   return (
     <>
-      <section>
+      <section className={classes.track_list_section}>
         {album && (
           <>
             <div className={classes.artist_block}>
-              <Title title="artist" />
               <div className={classes.artist_block_content}>
                 {album.artist.map((artist) => (
-                  <div className={classes.artist_info} key={artist._id}>
-                    <div className={classes.artist_avatar}>
-                      <ArtistAvatar avatar={artist.image} name={artist.name} />
-                    </div>
-                    <div className={classes.artist_info_name}>
-                      <ArtistName name={artist.name} />
+                  <div className={classes.artist_content}>
+                    <div className={classes.artist_info}>
+                      <div className={classes.artist_avatar}>
+                        <ArtistAvatar
+                          avatar={artist.image}
+                          name={artist.name}
+                        />
+                      </div>
+                      <div className={classes.artist_title}>
+                        <Title title="artist" />
+                      </div>
+                      <div className={classes.artist_name}>
+                        <ArtistName name={artist.name} />
+                      </div>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className={classes.tracks_block}>
-              <Title title="album" />
-              <div className={classes.tracks_block_content}>
-                <div className={classes.album_info_block}>
+            <div className={classes.album_track_block}>
+              <div className={classes.album}>
+                <div className={classes.album_cover}>
                   <AlbumCover cover={album.image} name={album.name} />
-                  <AlbumInfo
-                    name={album.name}
-                    release_year={album.release_year}
-                  />
                 </div>
-                <div className={classes.track_list_block}>
-                  <div className={classes.track_list_title}>
-                    <Title title={'Tracks'} />
+                <div className={classes.album_info}>
+                  <div className={classes.album_title}>
+                    <Title title="album" />
                   </div>
-                  <div className={classes.track_list_content}>
-                    {renderContent()}
+                  <div className={classes.album_name}>
+                    <AlbumName name={album.name} />
                   </div>
+                  <div className={classes.album_release_year}>
+                    <p>Released</p>
+                    <AlbumReleaseYear release_year={album.release_year} />
+                  </div>
+                </div>
+              </div>
+
+              <div className={classes.track_list}>
+                <div className={classes.track_list_title}>
+                  <Title title={`${album.name} tracklist`} />
+                </div>
+                <div className={classes.track_list_content}>
+                  {renderContent()}
                 </div>
               </div>
             </div>

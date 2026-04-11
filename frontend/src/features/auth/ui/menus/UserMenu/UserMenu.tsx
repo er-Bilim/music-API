@@ -29,6 +29,18 @@ const UserMenu = () => {
             create artist
           </NavLink>
         </li>
+        <li className={classes.nav_item}>
+          <NavLink
+            to={'/create-album'}
+            className={({ isActive }) =>
+              isActive
+                ? `${classes.nav_item_link} ${classes.active}`
+                : `${classes.nav_item_link}`
+            }
+          >
+            create album
+          </NavLink>
+        </li>
       </ul>
     </>
   );

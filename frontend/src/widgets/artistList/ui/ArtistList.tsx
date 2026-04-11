@@ -71,7 +71,7 @@ const ArtistList = () => {
   };
 
   return (
-    <section>
+    <section className={classes.artist_section}>
       <Title title={'Artists'} />
       <div className={classes.artist_list_content}>{renderContent()}</div>
     </section>

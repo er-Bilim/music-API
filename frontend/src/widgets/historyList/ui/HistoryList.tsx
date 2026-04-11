@@ -35,7 +35,7 @@ const HistoryList = () => {
     return (
       <>
         {trackHistory.map((history) => (
-          <HistoryCard history={history} key={history._id} />
+          <HistoryCard history={history} />
         ))}
       </>
     );
@@ -44,7 +44,15 @@ const HistoryList = () => {
   return (
     <section className={classes.track_history}>
       <Title title="track history" />
-      <div className={classes.track_history_list}>{renderContent()}</div>
+      <div className={classes.table}>
+        <div className={classes.table_header}>
+          <div className={classes.table_cell}>artist</div>
+          <div className={classes.table_cell}>track</div>
+          <div className={classes.table_cell}>date</div>
+        </div>
+
+        <div className={classes.table_body}>{renderContent()}</div>
+      </div>
     </section>
   );
 };

@@ -1,3 +1,5 @@
 .username {
   letter-spacing: 3px;
+  font-size: var(--font-size-md);
+  text-transform: uppercase;
 }

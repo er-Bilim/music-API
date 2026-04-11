@@ -1,20 +1,23 @@
 .header {
-  margin: var(--space-md) 0;
+  background: var(--grey-900);
 }
 
 .header_content {
   display: flex;
   align-items: center;
-  justify-content: center;
   padding: var(--space-md) 0;
-  background: var(--grey-900);
-  border-radius: var(--border-radius-lg);
 }
 
 .header_menu {
   display: flex;
   justify-content: flex-end;
-  margin-top: var(--space-lg);
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-md);
 }
 
 .logo_name {
@@ -24,6 +27,8 @@
   color: var(--blueGrey-100);
 }
 
-.logo_name:active {
-  color: var(--blueGrey-100);
+.logo_image {
+  display: block;
+  width: 70px;
+  height: 50px;
 }

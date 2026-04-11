@@ -1,14 +1,23 @@
-.history_card {
-  width: 45%;
-  display: flex;
-  gap: var(--space-md);
-  align-items: center;
-  border: 1px solid var(--grey-900);
-  padding: var(--space-md);
-  border-radius: var(--border-radius-sm);
+.table_row {
+  display: table-row;
 }
 
-.artist {
+.table_cell {
+  display: table-cell;
+  padding: var(--space-md) var(--space-lg);
+  vertical-align: middle;
+  text-align: left;
+  border-bottom: 1px solid var(--pink-500);
+}
+
+.artist_info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.artist_photo {
   width: 100px;
   height: 100px;
   border-radius: var(--circular);

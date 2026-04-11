@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { NavLink, useSearchParams } from 'react-router-dom';
 import { useAlbumStore } from '../../../entities/album/model/albumStore';
 import classes from './AlbumList.module.css';
 import Loader from '../../../shared/ui/Loader/Loader';
 import AlbumCard from '../../../entities/album/ui/AlbumCard/AlbumCard';
-import Title from '../../../shared/ui/Title/Title';
 import ArtistAvatar from '../../../entities/artist/ui/ArtistAvatar/ArtistAvatar';
 import { useArtistStore } from '../../../entities/artist/model/artistStore';
 import ArtistName from '../../../entities/artist/ui/ArtistName/ArtistName';
 import { useUserStore } from '../../../entities/user/model/userStore';
 import Status from '../../../shared/ui/Status/Status';
+import ArtistInformation from '../../../entities/artist/ui/ArtistInformation/ArtistInformation';
 
 const AlbumList = () => {
   const { user } = useUserStore((state) => state);
@@ -85,10 +85,14 @@ const AlbumList = () => {
     return (
       <>
         {albums.map((album) => (
-          <Link to={`/tracks?album=${album._id}`} key={album._id}>
+          <NavLink
+            to={`/tracks?album=${album._id}`}
+            key={album._id}
+            className={classes.album_card}
+          >
             <AlbumCard album={album} />
             {renderStatus(album.isPublished)}
-          </Link>
+          </NavLink>
         ))}
       </>
     );
@@ -96,22 +100,31 @@ const AlbumList = () => {
 
   return (
     <>
-      <section>
-        <div className={classes.album_artist_content}>
-          <Title title={'Artist'} />
-          {artist && (
-            <div className={classes.album_artist_info}>
-              <div className={classes.artist_avatar}>
-                <ArtistAvatar avatar={artist.image} name={artist.name} />
-              </div>
-              <div className={classes.album_artist_info_name}>
-                <ArtistName name={artist.name} />
+      <section className={classes.album_section}>
+        {artist && (
+          <>
+            <div className={classes.artist_content}>
+              <div className={classes.artist_info}>
+                <div className={classes.artist_avatar}>
+                  <ArtistAvatar avatar={artist.image} name={artist.name} />
+                </div>
+                <div className={classes.artist_name}>
+                  <ArtistName name={artist.name} />
+                </div>
+                <div className={classes.artist_information}>
+                  <ArtistInformation information={artist.information} />
+                </div>
               </div>
             </div>
-          )}
-        </div>
-        <Title title={'Albums'} />
-        <div className={classes.album_list_content}>{renderContent()}</div>
+            <div>
+              <div className={classes.albums_artist_title}>
+                <ArtistName name={artist.name} />
+                <p>albums</p>
+              </div>
+              <div className={classes.album_list}>{renderContent()}</div>
+            </div>
+          </>
+        )}
       </section>
     </>
   );

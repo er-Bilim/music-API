@@ -1,3 +1,7 @@
+.artist_section {
+  margin-top: var(--space-3xl);
+}
+
 .artist_list_content {
   display: flex;
   flex-direction: row;
