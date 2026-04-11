@@ -111,3 +111,8 @@
   height: 40px;
   color: var(--pink-500);
 }
+
+.status {
+  width: 200px;
+  margin-bottom: var(--space-md);
+}

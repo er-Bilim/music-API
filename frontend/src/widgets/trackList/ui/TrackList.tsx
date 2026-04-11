@@ -52,9 +52,9 @@ const TrackList = () => {
   const renderStatus = (status: boolean) => {
     if (user && user.user.role === 'admin') {
       return (
-        <>
+        <div className={classes.status}>
           <Status status={status} />
-        </>
+        </div>
       );
     }
   };
@@ -107,9 +107,7 @@ const TrackList = () => {
               <TrackCard track={track} />
               {renderPlayButton(track)}
             </div>
-            <div className={classes.status}>
-              {renderStatus(track.isPublished)}
-            </div>
+            {renderStatus(track.isPublished)}
           </div>
         ))}
       </>

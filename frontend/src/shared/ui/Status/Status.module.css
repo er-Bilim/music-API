@@ -6,7 +6,6 @@
   padding: var(--space-sm) var(--space-md);
   display: inline-block;
   font-size: var(--font-size-sm);
-  margin-top: var(--space-md);
 }
 
 .published {
