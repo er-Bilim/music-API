@@ -10,6 +10,8 @@ import TrackHistoryPage from './pages/track/TrackHistoryPage';
 import { useUserStore } from './entities/user/model/userStore';
 import ProtectedRouter from './app/providers/router/ProtectedRoute';
 import CreateArtistPage from './pages/createArtist/CreateArtistPage';
+import CreateAlbumPage from './pages/createAlbum/CreateAlbumPage';
+import CreateTrackPage from './pages/createTrack/CreateTrackPage';
 
 const App = () => {
   const { user } = useUserStore((state) => state);
@@ -18,9 +20,10 @@ const App = () => {
     <>
       <MainLayout>
         <Routes>
-          <Route path="/" element={<HomePage />}></Route>
-          <Route path="/albums" element={<AlbumPage />}></Route>
-          <Route path="/tracks" element={<TrackPage />}></Route>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/albums" element={<AlbumPage />} />
+          <Route path="/tracks" element={<TrackPage />} />
+
           <Route
             path="/track-history"
             element={
@@ -28,7 +31,7 @@ const App = () => {
                 <TrackHistoryPage />
               </ProtectedRouter>
             }
-          ></Route>
+          />
           <Route
             path="/create-artist"
             element={
@@ -36,7 +39,23 @@ const App = () => {
                 <CreateArtistPage />
               </ProtectedRouter>
             }
-          ></Route>
+          />
+          <Route
+            path="/create-album"
+            element={
+              <ProtectedRouter isAuth={Boolean(user)}>
+                <CreateAlbumPage />
+              </ProtectedRouter>
+            }
+          />
+          <Route
+            path="/create-track"
+            element={
+              <ProtectedRouter isAuth={Boolean(user)}>
+                <CreateTrackPage />
+              </ProtectedRouter>
+            }
+          />
           <Route
             path="/login"
             element={
@@ -44,7 +63,7 @@ const App = () => {
                 <LoginPage />
               </ProtectedRouter>
             }
-          ></Route>
+          />
           <Route
             path="/signup"
             element={
@@ -52,8 +71,8 @@ const App = () => {
                 <RegisterPage />
               </ProtectedRouter>
             }
-          ></Route>
-          <Route path="*" element={<NotFound />}></Route>
+          />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </MainLayout>
     </>

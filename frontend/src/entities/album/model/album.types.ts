@@ -9,3 +9,14 @@ export interface IAlbum {
   trackCount: number;
   isPublished: boolean;
 }
+
+export interface IAlbumMutation {
+  name: string;
+  release_year: number;
+  image?: File | null;
+}
+
+export interface IAlbumCreated {
+  message: string;
+  album: IAlbum;
+}

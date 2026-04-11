@@ -3,6 +3,68 @@ textarea {
   max-height: 200px;
 }
 
+.select {
+  cursor: pointer;
+  appearance: base-select;
+  padding: var(--space-md);
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--grey-900);
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+}
+
+.select:disabled {
+  background: var(--grey-500);
+  cursor: not-allowed;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--grey-900);
+}
+
+.select::picker(select) {
+  appearance: base-select;
+  border: 1px solid var(--grey-900);
+  border-radius: var(--border-radius-sm);
+}
+
+.select::picker-icon {
+  transition: 0.4s rotate;
+}
+
+.select:hover {
+  background: var(--pink-500);
+  color: var(--grey-50);
+}
+
+.select:open::picker-icon {
+  rotate: 180deg;
+}
+
+option {
+  padding: 10px;
+  color: var(--grey-900);
+  background: var(--grey-50);
+}
+
+option:disabled {
+  color: var(--blueGrey-300);
+  cursor: not-allowed;
+}
+
+option:not(:disabled):hover {
+  background: var(--pink-500);
+  color: var(--grey-50);
+}
+
+option::checkmark {
+  order: 1;
+  margin-left: auto;
+  content: '\f164';
+  font-family: 'Font Awesome 5 Free';
+}
+
 .form_block {
   width: 600px;
   display: flex;
@@ -71,16 +133,10 @@ textarea {
   color: var(--grey-50);
   text-transform: uppercase;
   letter-spacing: 2px;
+  margin-top: var(--space-md);
 }
 
 .form_input_button:disabled {
   background: var(--grey-500);
   cursor: not-allowed;
-}
-
-.form_input_file {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
 }

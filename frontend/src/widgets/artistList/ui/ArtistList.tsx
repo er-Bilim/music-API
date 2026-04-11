@@ -15,11 +15,11 @@ const ArtistList = () => {
 
   useEffect(() => {
     getArtists();
-
+    
     return () => {
       clearArtists();
     };
-  }, [getArtists, clearArtists]);
+  }, [getArtists, clearArtists, user]);
 
   const renderStatus = (status: boolean) => {
     if (user && user.user.role === 'admin') {

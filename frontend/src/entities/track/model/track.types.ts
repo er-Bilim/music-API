@@ -7,3 +7,15 @@ export interface ITrack {
   youtubeLink: string | null;
   isPublished: boolean;
 }
+
+export interface ITrackMutation {
+  album_id: string;
+  name: string;
+  time: string;
+  youtubeLink: string | null;
+}
+
+export interface ICreatedTrack {
+  message: string;
+  track: ITrack;
+}

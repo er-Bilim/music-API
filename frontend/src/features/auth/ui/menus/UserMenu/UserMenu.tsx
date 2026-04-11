@@ -1,12 +1,17 @@
 import { NavLink } from 'react-router-dom';
 import classes from './UserMenu.module.css';
+import { motion } from 'motion/react';
+import { animationButton } from '../animation';
+
+const NavLinkMotion = motion.create(NavLink);
 
 const UserMenu = () => {
   return (
     <>
       <ul className={classes.nav_items}>
         <li className={classes.nav_item}>
-          <NavLink
+          <NavLinkMotion
+            {...animationButton}
             to={'/track-history'}
             className={({ isActive }) =>
               isActive
@@ -15,10 +20,11 @@ const UserMenu = () => {
             }
           >
             track history
-          </NavLink>
+          </NavLinkMotion>
         </li>
         <li className={classes.nav_item}>
-          <NavLink
+          <NavLinkMotion
+            {...animationButton}
             to={'/create-artist'}
             className={({ isActive }) =>
               isActive
@@ -27,10 +33,11 @@ const UserMenu = () => {
             }
           >
             create artist
-          </NavLink>
+          </NavLinkMotion>
         </li>
         <li className={classes.nav_item}>
-          <NavLink
+          <NavLinkMotion
+            {...animationButton}
             to={'/create-album'}
             className={({ isActive }) =>
               isActive
@@ -39,7 +46,20 @@ const UserMenu = () => {
             }
           >
             create album
-          </NavLink>
+          </NavLinkMotion>
+        </li>
+        <li className={classes.nav_item}>
+          <NavLinkMotion
+            {...animationButton}
+            to={'/create-track'}
+            className={({ isActive }) =>
+              isActive
+                ? `${classes.nav_item_link} ${classes.active}`
+                : `${classes.nav_item_link}`
+            }
+          >
+            create track
+          </NavLinkMotion>
         </li>
       </ul>
     </>

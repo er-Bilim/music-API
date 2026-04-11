@@ -94,7 +94,7 @@ const CreateArtistForm = () => {
             </div>
 
             <div className={classes.form_input_content}>
-              <label htmlFor="information" className={classes.form_input_label}>
+              <label htmlFor="artist_photo" className={classes.form_input_label}>
                 Artist photo
               </label>
               <div className={classes.form_input_file}>
@@ -103,9 +103,9 @@ const CreateArtistForm = () => {
                   {...register('image')}
                   onChange={onChangeFileHandler}
                 />
-                {errors.information && (
+                {errors.image && (
                   <p className={classes.form_input_error}>
-                    {errors.information.message}
+                    {errors.image.message}
                   </p>
                 )}
               </div>

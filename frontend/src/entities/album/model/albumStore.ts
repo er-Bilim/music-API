@@ -1,19 +1,34 @@
 import { create } from 'zustand';
-import type { IAlbum } from './album.types';
+import type { IAlbum, IAlbumMutation } from './album.types';
 import { devtools } from 'zustand/middleware';
-import { getAlbum, getAlbums } from '../service/album.service';
-import type { IGlobalError } from '../../../shared/types/error.types';
+import {
+  createAlbumService,
+  getAlbum,
+  getAlbums,
+} from '../service/album.service';
+import type {
+  IGlobalError,
+  IValidationError,
+} from '../../../shared/types/error.types';
 import { parseApiError } from '../../../shared/api/error/normalizeResError';
+import { toast } from 'react-toastify';
 
 interface IAlbumState {
   albums: IAlbum[];
   album: IAlbum | null;
+
   fetchLoading: boolean;
-  getArtistAlbums: (artist_id: string) => Promise<IAlbum[]>;
-  getArtistAlbum: (album_id: string) => Promise<IAlbum>;
+  createLoading: boolean;
+
+  getArtistAlbums: (artist_id: string) => Promise<void>;
+  getArtistAlbum: (album_id: string) => Promise<void>;
+  createAlbum: (data: IAlbumMutation) => Promise<void>;
+
   clearAlbums: () => void;
   clearAlbum: () => void;
+
   error: IGlobalError | null;
+  createError: IValidationError | null;
 }
 
 export const useAlbumStore = create<IAlbumState>()(
@@ -22,7 +37,9 @@ export const useAlbumStore = create<IAlbumState>()(
       albums: [],
       album: null,
       fetchLoading: false,
+      createLoading: false,
       error: null,
+      createError: null,
 
       clearAlbums: () => {
         set({ albums: [] });
@@ -58,6 +75,21 @@ export const useAlbumStore = create<IAlbumState>()(
             error: parseApiError(error as IGlobalError),
           });
 
+          throw error;
+        }
+      },
+
+      createAlbum: async (data: IAlbumMutation) => {
+        set({ createLoading: true, createError: null });
+        try {
+          const createdAlbum = await createAlbumService(data);
+          toast.success(createdAlbum.message);
+          set({ createLoading: false });
+        } catch (error) {
+          set({
+            createLoading: false,
+            createError: parseApiError(error as IValidationError),
+          });
           throw error;
         }
       },

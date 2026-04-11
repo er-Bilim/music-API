@@ -17,6 +17,7 @@ interface IUserState {
   registerError: IValidationError | null;
   loginLoading: boolean;
   loginError: IGlobalError | null;
+  logoutLoading: boolean;
 }
 
 export const useUserStore = create<IUserState>()(
@@ -28,6 +29,7 @@ export const useUserStore = create<IUserState>()(
         registerError: null,
         loginLoading: false,
         loginError: null,
+        logoutLoading: false,
 
         registerUser: async (data) => {
           set({ registerLoading: true, registerError: null });
@@ -62,16 +64,20 @@ export const useUserStore = create<IUserState>()(
         },
 
         logoutUser: async () => {
+          set({ logoutLoading: true });
           try {
             const user = get().user;
             if (user) {
               set({
                 user: null,
+                logoutLoading: false,
               });
               await logout();
             }
           } catch (error) {
-            console.error(error);
+            set({
+              logoutLoading: false,
+            });
 
             throw error;
           }

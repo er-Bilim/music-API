@@ -30,6 +30,7 @@
 }
 
 .logout_button {
+  display: flex;
   width: 150px;
   cursor: pointer;
   font-size: var(--font-size-md);
@@ -37,4 +38,6 @@
   text-transform: uppercase;
   letter-spacing: 4px;
   border: 1px solid var(--grey-900);
+  align-items: center;
+  justify-content: center;
 }

@@ -6,7 +6,10 @@ import UserName from '../../../../../shared/ui/user/UserName/UserName';
 import classes from './AuthMenu.module.css';
 import Container from '../../../../../shared/ui/Container/Container';
 import { motion } from 'motion/react';
-import { animationButton } from './animation';
+import { animationButton } from '../animation';
+import { Link } from 'react-router-dom';
+
+const LinkMotion = motion.create(Link);
 
 const AuthMenu = () => {
   const { user, logoutUser } = useUserStore((state) => state);
@@ -17,14 +20,14 @@ const AuthMenu = () => {
         <div className={classes.user_block}>
           <UserMenu />
           <div className={classes.user_menu_content}>
-            <motion.button
+            <LinkMotion
               className={classes.logout_button}
-              type="button"
+              to={'/'}
               onClick={logoutUser}
               {...animationButton}
             >
               logout
-            </motion.button>
+            </LinkMotion>
             <div className={classes.user_info}>
               <UserAvatar avatar={user.user.username} />
               <UserName username={user.user.username} />

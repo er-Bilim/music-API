@@ -1,0 +1,6 @@
+.create_track {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: var(--space-3xl);
+}
