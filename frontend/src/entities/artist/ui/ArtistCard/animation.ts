@@ -1,11 +1,13 @@
 import type { MotionNodeOptions } from 'motion';
 
-export const animationConfigAvatar: MotionNodeOptions = {
+export const animationArtistCard: MotionNodeOptions = {
   initial: {
-    top: '10px',
+    backgroundColor: 'var(--grey-50)',
+    border: `1px solid var(--grey-50)`,
   },
   whileHover: {
-    top: '0px',
+    backgroundColor: 'color-mix(in srgb, var(--pink-500), transparent 85%)',
+    border: `1px solid var(--pink-500)`,
   },
   transition: {
     duration: 0.3,

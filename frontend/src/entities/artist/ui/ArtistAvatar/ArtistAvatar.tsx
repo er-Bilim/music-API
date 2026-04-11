@@ -13,9 +13,7 @@ const ArtistAvatar: FC<IArtistAvatarProps> = ({ avatar, name }) => {
 
   return (
     <>
-      <div className={classes.artist_avatar_block}>
-        <img src={imageURL} alt={name} className={classes.artist_avatar} />
-      </div>
+      <img src={imageURL} alt={name} className={classes.artist_avatar} />
     </>
   );
 };

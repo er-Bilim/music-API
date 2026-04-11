@@ -8,9 +8,7 @@ interface IArtistNameProps {
 const ArtistName: FC<IArtistNameProps> = ({ name }) => {
   return (
     <>
-      <div className={classes.artist_name_block}>
-        <p className={classes.artist_name}>{name}</p>
-      </div>
+      <p className={classes.artist_name}>{name}</p>
     </>
   );
 };
