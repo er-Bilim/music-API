@@ -13,9 +13,7 @@ const AlbumCover: FC<IAlbumCoverProps> = ({ cover, name }) => {
 
   return (
     <>
-      <div className={classes.album_cover_block}>
-        <img src={imageURL} alt={name} className={classes.album_cover}/>
-      </div>
+      <img src={imageURL} alt={name} className={classes.album_cover} />
     </>
   );
 };

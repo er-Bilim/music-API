@@ -1,15 +1,42 @@
 .album_card {
-  width: 590px;
+  width: 200px;
   display: flex;
-  flex-direction: row;
-  border: 1px solid var(--grey-900);
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-sm);
+  margin-bottom: var(--space-sm);
 }
 
 .album_cover {
-  position: relative;
+  width: 100%;
+  height: 200px;
 }
 
 .album_info {
-  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
   color: var(--blueGrey-100);
+  margin: var(--space-md) 0;
+}
+
+.album_info_name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 5px;
+}
+
+.album_info_release_year {
+  margin-top: var(--space-sm);
+  letter-spacing: 5px;
+  font-size: var(--font-size-xs);
+  color: var(--blueGrey-300);
+}
+
+.album_info_track_count {
+  font-size: var(--font-size-xs);
+  color: var(--blueGrey-300);
+  font-weight: var(--font-weight-bold);
+  margin-top: var(--space-md);
 }
