@@ -2,3 +2,34 @@
   width: 100%;
   padding: var(--space-md);
 }
+
+.track_info {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  column-gap: var(--space-lg);
+}
+
+.track_numeric {
+  font-size: inherit;
+  color: var(--pink-500);
+  font-weight: var(--font-weight-bold);
+}
+
+.track_info_content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.track_name {
+  display: inline-flex;
+  gap: var(--space-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.track_time {
+  font-size: var(--font-size-sm);
+  color: var(--grey-590);
+  font-weight: var(--font-weight-regular);
+}
