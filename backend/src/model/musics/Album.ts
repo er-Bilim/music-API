@@ -1,4 +1,4 @@
-import { isValidObjectId, model, Schema } from 'mongoose';
+import mongoose, { isValidObjectId, model, Schema } from 'mongoose';
 import Artist from './Artist.ts';
 
 const AlbumSchema = new Schema({
@@ -47,6 +47,7 @@ AlbumSchema.set('toJSON', {
 AlbumSchema.pre('find', function () {
   this.sort({ release_year: -1 });
 });
+
 
 const Album = model('Album', AlbumSchema);
 
