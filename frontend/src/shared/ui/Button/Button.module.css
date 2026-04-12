@@ -1,0 +1,10 @@
+.button {
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+  letter-spacing: inherit;
+  text-transform: inherit;
+}
