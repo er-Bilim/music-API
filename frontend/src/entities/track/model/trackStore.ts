@@ -1,7 +1,7 @@
 import { devtools } from 'zustand/middleware';
 import type { ITrack, ITrackMutation } from './track.types';
 import { create } from 'zustand';
-import { createTrackService, getTracks } from '../service/track.service';
+import { createTrackService, deleteTrackService, getTracks, togglePublishedTrackService } from '../service/track.service';
 import type {
   IGlobalError,
   IValidationError,
@@ -13,9 +13,13 @@ interface ITrackState {
   tracks: ITrack[];
   fetchLoading: boolean;
   createLoading: boolean;
+  updateLoading: boolean;
+  deleteLoading: boolean;
 
   getTracks: (album_id: string) => Promise<ITrack[]>;
   createTrack: (data: ITrackMutation) => Promise<void>;
+  togglePublishTrack: (id: string) => Promise<void>;
+  deleteTrack: (id: string) => Promise<void>;
 
   clearTracks: () => void;
 
@@ -61,6 +65,38 @@ export const useTracksStore = create<ITrackState>()(
           set({
             createLoading: false,
             createError: parseApiError(error as IValidationError),
+          });
+
+          throw error;
+        }
+      },
+
+      togglePublishTrack: async (id) => {
+        set({ updateLoading: true, error: null });
+        try {
+          await togglePublishedTrackService(id);
+          set({ updateLoading: false });
+        } catch (error) {
+          set({
+            updateLoading: false,
+            error: parseApiError(error as IGlobalError),
+          });
+
+          throw error;
+        }
+      },
+
+      deleteTrack: async (id) => {
+        set({ deleteLoading: true, error: null });
+
+        try {
+          const deletedArtist = await deleteTrackService(id);
+          set({ deleteLoading: false });
+          toast.success(deletedArtist.message);
+        } catch (error) {
+          set({
+            deleteLoading: false,
+            error: parseApiError(error as IGlobalError),
           });
 
           throw error;

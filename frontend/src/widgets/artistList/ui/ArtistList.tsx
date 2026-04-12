@@ -7,29 +7,30 @@ import { Link } from 'react-router-dom';
 import Title from '../../../shared/ui/Title/Title';
 import { useUserStore } from '../../../entities/user/model/userStore';
 import Status from '../../../shared/ui/Status/Status';
+import AdminActions from '../../adminActions/ui/AdminActions';
+import PublishedArtist from '../../../features/artist/publish/ui/PublishArtist';
+import DeleteArtist from '../../../features/artist/delete/ui/DeleteArtist';
+import type { IArtist } from '../../../entities/artist/model/artist.types';
 
 const ArtistList = () => {
   const { user } = useUserStore((state) => state);
-  const { artists, fetchLoading, getArtists, clearArtists, error } =
-    useArtistStore((state) => state);
+  const {
+    artists,
+    fetchLoading,
+    getArtists,
+    clearArtists,
+    error,
+    updateLoading,
+    deleteLoading,
+  } = useArtistStore((state) => state);
 
   useEffect(() => {
     getArtists();
-    
+
     return () => {
       clearArtists();
     };
-  }, [getArtists, clearArtists, user]);
-
-  const renderStatus = (status: boolean) => {
-    if (user && user.user.role === 'admin') {
-      return (
-        <>
-          <Status status={status} />
-        </>
-      );
-    }
-  };
+  }, [getArtists, clearArtists, user, updateLoading, deleteLoading]);
 
   const renderContent = () => {
     if (fetchLoading) {
@@ -58,13 +59,36 @@ const ArtistList = () => {
       );
     }
 
+    const renderActions = (artist: IArtist) => {
+      if (artist.isPublished) {
+        return (
+          <>
+            <DeleteArtist id={artist._id} />
+          </>
+        );
+      }
+
+      return (
+        <>
+          <PublishedArtist id={artist._id} />
+        </>
+      );
+    };
+
     return (
       <>
         {artists.map((artist) => (
-          <Link to={`/albums?artist=${artist._id}`} key={artist._id}>
-            <ArtistCard artist={artist} />
-            {renderStatus(artist.isPublished)}
-          </Link>
+          <div key={artist._id}>
+            <Link to={`/albums?artist=${artist._id}`} key={artist._id}>
+              <ArtistCard artist={artist} />
+            </Link>
+            <AdminActions>
+              <div className={classes.artist_admin_actions}>
+                <Status status={artist.isPublished} />
+                {renderActions(artist)}
+              </div>
+            </AdminActions>
+          </div>
         ))}
       </>
     );

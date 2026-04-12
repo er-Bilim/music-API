@@ -58,3 +58,8 @@ ul {
 *::-webkit-scrollbar-thumb:hover {
   background: var(--pink-500);
 }
+
+::selection {
+  background-color: var(--pink-500);
+  color: var(--grey-50)
+}

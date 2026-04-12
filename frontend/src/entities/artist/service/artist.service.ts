@@ -34,3 +34,17 @@ export const createArtistService = async (data: IArtistMutation) => {
   const createdArtist: IArtistCreated = response.data;
   return createdArtist;
 };
+
+export const togglePublishedArtistService = async (id: string) => {
+  const response = await axiosApi.patch<IArtist>(
+    `/artists/${id}/togglePublished`,
+  );
+  const data = response.data;
+  return data;
+};
+
+export const deleteArtistService = async (id: string) => {
+  const response = await axiosApi.delete<{ message: string }>(`/artists/${id}`);
+  const data = response.data;
+  return data;
+};

@@ -3,8 +3,10 @@ import { devtools } from 'zustand/middleware';
 import type { IArtist, IArtistMutation } from './artist.types';
 import {
   createArtistService,
+  deleteArtistService,
   getArtist,
   getArtists,
+  togglePublishedArtistService,
 } from '../service/artist.service';
 import type {
   IGlobalError,
@@ -19,10 +21,14 @@ interface IArtistState {
 
   fetchLoading: boolean;
   createLoading: boolean;
+  updateLoading: boolean;
+  deleteLoading: boolean;
 
   getArtists: () => Promise<void>;
   getArtist: (artist_id: string) => Promise<void>;
   createArtist: (data: IArtistMutation) => Promise<void>;
+  togglePublishArtist: (id: string) => Promise<void>;
+  deleteArtist: (id: string) => Promise<void>;
 
   clearArtists: () => void;
   clearArtist: () => void;
@@ -38,6 +44,7 @@ export const useArtistStore = create<IArtistState>()(
       artist: null,
       fetchLoading: false,
       createLoading: false,
+      updateLoading: false,
       error: null,
 
       clearArtists: () => {
@@ -88,6 +95,38 @@ export const useArtistStore = create<IArtistState>()(
           set({
             createLoading: false,
             createError: parseApiError(error as IValidationError),
+          });
+
+          throw error;
+        }
+      },
+
+      togglePublishArtist: async (id) => {
+        set({ updateLoading: true, error: null });
+        try {
+          await togglePublishedArtistService(id);
+          set({ updateLoading: false });
+        } catch (error) {
+          set({
+            updateLoading: false,
+            error: parseApiError(error as IGlobalError),
+          });
+
+          throw error;
+        }
+      },
+
+      deleteArtist: async (id) => {
+        set({ deleteLoading: true, error: null });
+
+        try {
+          const deletedArtist = await deleteArtistService(id);
+          set({ deleteLoading: false });
+          toast.success(deletedArtist.message);
+        } catch (error) {
+          set({
+            deleteLoading: false,
+            error: parseApiError(error as IGlobalError),
           });
 
           throw error;

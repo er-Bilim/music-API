@@ -13,3 +13,17 @@ export const createTrackService = async (data: ITrackMutation) => {
   const trackData = response.data;
   return trackData;
 };
+
+export const togglePublishedTrackService = async (id: string) => {
+  const response = await axiosApi.patch<ITrack>(
+    `/tracks/${id}/togglePublished`,
+  );
+  const data = response.data;
+  return data;
+};
+
+export const deleteTrackService = async (id: string) => {
+  const response = await axiosApi.delete<{ message: string }>(`/tracks/${id}`);
+  const data = response.data;
+  return data;
+};

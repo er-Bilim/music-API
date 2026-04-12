@@ -9,12 +9,15 @@ import { useAlbumStore } from '../../../entities/album/model/albumStore';
 import AlbumCover from '../../../entities/album/ui/AlbumCover/AlbumCover';
 import ArtistAvatar from '../../../entities/artist/ui/ArtistAvatar/ArtistAvatar';
 import ArtistName from '../../../entities/artist/ui/ArtistName/ArtistName';
-import PlayButton from '../../../features/playTrack/ui/PlayButton/PlayButton';
 import type { ITrack } from '../../../entities/track/model/track.types';
 import { useUserStore } from '../../../entities/user/model/userStore';
 import Status from '../../../shared/ui/Status/Status';
 import AlbumName from '../../../entities/album/ui/AlbumName/AlbumName';
 import AlbumReleaseYear from '../../../entities/album/ui/AlbumReleaseYear/AlbumReleaseYear';
+import AdminActions from '../../adminActions/ui/AdminActions';
+import PlayButton from '../../../features/track/play/ui/playButton/PlayButton';
+import DeleteTrack from '../../../features/track/delete/ui/DeleteTrack';
+import PublishTrack from '../../../features/track/publish/ui/PublishTrack';
 
 const TrackList = () => {
   const {
@@ -32,6 +35,8 @@ const TrackList = () => {
     fetchLoading: fetchTrackLoading,
     getTracks,
     clearTracks,
+    updateLoading,
+    deleteLoading,
   } = useTracksStore((state) => state);
 
   const [queryParams] = useSearchParams();
@@ -47,17 +52,15 @@ const TrackList = () => {
       clearAlbum();
       clearTracks();
     };
-  }, [getArtistAlbum, getTracks, album_id, clearAlbum, clearTracks]);
-
-  const renderStatus = (status: boolean) => {
-    if (user && user.user.role === 'admin') {
-      return (
-        <div className={classes.status}>
-          <Status status={status} />
-        </div>
-      );
-    }
-  };
+  }, [
+    getArtistAlbum,
+    getTracks,
+    album_id,
+    clearAlbum,
+    clearTracks,
+    updateLoading,
+    deleteLoading,
+  ]);
 
   const renderPlayButton = (track: ITrack) => {
     if (user && album && album.artist[0]) {
@@ -70,6 +73,22 @@ const TrackList = () => {
     }
 
     return null;
+  };
+
+  const renderActions = (artist: ITrack) => {
+    if (artist.isPublished) {
+      return (
+        <>
+          <DeleteTrack id={artist._id} />
+        </>
+      );
+    }
+
+    return (
+      <>
+        <PublishTrack id={artist._id} />
+      </>
+    );
   };
 
   const renderContent = () => {
@@ -105,9 +124,16 @@ const TrackList = () => {
           <div key={track._id} className={classes.track_card}>
             <div className={classes.track_card_action}>
               <TrackCard track={track} />
-              {renderPlayButton(track)}
+              {track.youtubeLink && <>{renderPlayButton(track)}</>}
             </div>
-            {renderStatus(track.isPublished)}
+            <AdminActions>
+              <div className={classes.track_admin_actions}>
+                <div className={classes.status}>
+                  <Status status={track.isPublished} />
+                </div>
+                {renderActions(track)}
+              </div>
+            </AdminActions>
           </div>
         ))}
       </>

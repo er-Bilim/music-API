@@ -1,4 +1,4 @@
-import CreateTrackForm from "../../features/createTrack/ui/forms/CreateTrackForm";
+import CreateTrackForm from "../../features/track/create/ui/form/CreateTrackForm";
 import classes from "./CreateTrack.module.css"
 
 const CreateTrackPage = () => {

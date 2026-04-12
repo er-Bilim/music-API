@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { NavLink, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useAlbumStore } from '../../../entities/album/model/albumStore';
 import classes from './AlbumList.module.css';
 import Loader from '../../../shared/ui/Loader/Loader';
@@ -7,18 +7,21 @@ import AlbumCard from '../../../entities/album/ui/AlbumCard/AlbumCard';
 import ArtistAvatar from '../../../entities/artist/ui/ArtistAvatar/ArtistAvatar';
 import { useArtistStore } from '../../../entities/artist/model/artistStore';
 import ArtistName from '../../../entities/artist/ui/ArtistName/ArtistName';
-import { useUserStore } from '../../../entities/user/model/userStore';
 import Status from '../../../shared/ui/Status/Status';
 import ArtistInformation from '../../../entities/artist/ui/ArtistInformation/ArtistInformation';
+import type { IAlbum } from '../../../entities/album/model/album.types';
+import DeleteAlbum from '../../../features/album/delete/ui/DeleteAlbum';
+import PublishAlbum from '../../../features/album/publish/ui/PublishAlbum';
+import AdminActions from '../../adminActions/ui/AdminActions';
 
 const AlbumList = () => {
-  const { user } = useUserStore((state) => state);
-
   const {
     albums,
     fetchLoading: albumLoading,
     getArtistAlbums,
     clearAlbums,
+    updateLoading,
+    deleteLoading,
   } = useAlbumStore((state) => state);
 
   const {
@@ -43,17 +46,15 @@ const AlbumList = () => {
       clearArtist();
       clearAlbums();
     };
-  }, [getArtist, getArtistAlbums, clearArtist, clearAlbums, artist_id]);
-
-  const renderStatus = (status: boolean) => {
-    if (user && user.user.role === 'admin') {
-      return (
-        <>
-          <Status status={status} />
-        </>
-      );
-    }
-  };
+  }, [
+    getArtist,
+    getArtistAlbums,
+    clearArtist,
+    clearAlbums,
+    artist_id,
+    updateLoading,
+    deleteLoading,
+  ]);
 
   const renderContent = () => {
     if (albumLoading && artistLoading) {
@@ -85,15 +86,38 @@ const AlbumList = () => {
     return (
       <>
         {albums.map((album) => (
-          <NavLink
-            to={`/tracks?album=${album._id}`}
-            key={album._id}
-            className={classes.album_card}
-          >
-            <AlbumCard album={album} />
-            {renderStatus(album.isPublished)}
-          </NavLink>
+          <div key={album._id} className={classes.album}>
+            <Link
+              to={`/tracks?album=${album._id}`}
+              key={album._id}
+              className={classes.album_card}
+            >
+              <AlbumCard album={album} />
+            </Link>
+            <AdminActions>
+              <div className={classes.album_admin_actions}>
+                <Status status={album.isPublished} />
+                {renderActions(album)}
+              </div>
+            </AdminActions>
+          </div>
         ))}
+      </>
+    );
+  };
+
+  const renderActions = (artist: IAlbum) => {
+    if (artist.isPublished) {
+      return (
+        <>
+          <DeleteAlbum id={artist._id} />
+        </>
+      );
+    }
+
+    return (
+      <>
+        <PublishAlbum id={artist._id} />
       </>
     );
   };

@@ -40,3 +40,17 @@ export const createAlbumService = async (data: IAlbumMutation) => {
   const createdAlbum: IAlbumCreated = response.data;
   return createdAlbum;
 };
+
+export const togglePublishedAlbumService = async (id: string) => {
+  const response = await axiosApi.patch<IAlbum>(
+    `/albums/${id}/togglePublished`,
+  );
+  const data = response.data;
+  return data;
+};
+
+export const deleteAlbumService = async (id: string) => {
+  const response = await axiosApi.delete<{ message: string }>(`/albums/${id}`);
+  const data = response.data;
+  return data;
+};

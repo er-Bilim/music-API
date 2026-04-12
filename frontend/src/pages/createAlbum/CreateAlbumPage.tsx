@@ -1,4 +1,5 @@
-import CreateAlbumForm from '../../features/createAlbum/ui/forms/CreateAlbumForm';
+
+import CreateAlbumForm from '../../features/album/create/ui/forms/CreateAlbumForm';
 import classes from './CreateAlbumPage.module.css';
 
 const CreateAlbumPage = () => {

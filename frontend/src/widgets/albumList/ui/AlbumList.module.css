@@ -35,6 +35,12 @@
   margin-top: var(--space-md);
 }
 
+.album {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .albums_artist_title {
   display: inline-flex;
   gap: var(--space-sm);
@@ -57,4 +63,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+}
+
+.album_admin_actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
 }

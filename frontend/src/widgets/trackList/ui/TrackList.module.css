@@ -113,6 +113,12 @@
 }
 
 .status {
-  width: 200px;
+  width: 100%;
+}
+
+.track_admin_actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
   margin-bottom: var(--space-md);
 }

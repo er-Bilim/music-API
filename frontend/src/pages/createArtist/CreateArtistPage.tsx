@@ -1,4 +1,4 @@
-import CreateArtistForm from '../../features/createArtist/ui/forms/CreateArtistForm';
+import CreateArtistForm from '../../features/artist/create/ui/forms/CreateArtistForm';
 import classes from './CreateArtistPage.module.css';
 
 const CreateArtistPage = () => {

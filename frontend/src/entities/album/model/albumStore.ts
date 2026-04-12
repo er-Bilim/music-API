@@ -3,8 +3,10 @@ import type { IAlbum, IAlbumMutation } from './album.types';
 import { devtools } from 'zustand/middleware';
 import {
   createAlbumService,
+  deleteAlbumService,
   getAlbum,
   getAlbums,
+  togglePublishedAlbumService,
 } from '../service/album.service';
 import type {
   IGlobalError,
@@ -19,10 +21,14 @@ interface IAlbumState {
 
   fetchLoading: boolean;
   createLoading: boolean;
+  updateLoading: boolean;
+  deleteLoading: boolean;
 
   getArtistAlbums: (artist_id: string) => Promise<void>;
   getArtistAlbum: (album_id: string) => Promise<void>;
   createAlbum: (data: IAlbumMutation) => Promise<void>;
+  togglePublishAlbum: (id: string) => Promise<void>;
+  deleteAlbum: (id: string) => Promise<void>;
 
   clearAlbums: () => void;
   clearAlbum: () => void;
@@ -90,6 +96,38 @@ export const useAlbumStore = create<IAlbumState>()(
             createLoading: false,
             createError: parseApiError(error as IValidationError),
           });
+          throw error;
+        }
+      },
+
+      togglePublishAlbum: async (id) => {
+        set({ updateLoading: true, error: null });
+        try {
+          await togglePublishedAlbumService(id);
+          set({ updateLoading: false });
+        } catch (error) {
+          set({
+            updateLoading: false,
+            error: parseApiError(error as IGlobalError),
+          });
+
+          throw error;
+        }
+      },
+
+      deleteAlbum: async (id) => {
+        set({ deleteLoading: true, error: null });
+
+        try {
+          const deletedArtist = await deleteAlbumService(id);
+          set({ deleteLoading: false });
+          toast.success(deletedArtist.message);
+        } catch (error) {
+          set({
+            deleteLoading: false,
+            error: parseApiError(error as IGlobalError),
+          });
+
           throw error;
         }
       },
