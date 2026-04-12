@@ -20,13 +20,17 @@ const AlbumsController = {
   },
 
   getById: async (
-    _req: Request,
+    req: Request,
     res: Response,
     next: NextFunction,
     album_id: string,
   ) => {
     try {
-      const album = await AlbumsService.getById(album_id);
+      const reqUser = req as RequestOptionalUser;
+
+      const role = reqUser.user?.role || 'guest';
+
+      const album = await AlbumsService.getById(album_id, role);
 
       if (!album) {
         return res.status(404).json({
@@ -46,8 +50,11 @@ const AlbumsController = {
     }
   },
 
-  getArtistAlbums: async (_req: Request, res: Response, artist_id: string) => {
-    const artistAlbums = await AlbumsService.getArtistAlbums(artist_id);
+  getArtistAlbums: async (req: Request, res: Response, artist_id: string) => {
+    const reqUser = req as RequestOptionalUser;
+
+    const role = reqUser.user?.role || 'guest';
+    const artistAlbums = await AlbumsService.getArtistAlbums(artist_id, role);
 
     if (artistAlbums.length === 0) {
       return res.status(404).json({

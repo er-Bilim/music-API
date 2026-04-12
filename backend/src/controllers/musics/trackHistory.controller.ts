@@ -3,7 +3,6 @@ import type { ITrackHistory } from '../../types/music.types.ts';
 import TrackHistoryService from '../../services/musics/trackHistory.service.ts';
 import { Error } from 'mongoose';
 import type { RequestWithUser } from '../../middlewares/auth.ts';
-import type deleteImage from '../../utils/deleteImage.ts';
 
 const TrackHistoryController = {
   getAll: async (req: Request, res: Response, next: NextFunction) => {

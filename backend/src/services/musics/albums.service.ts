@@ -11,11 +11,12 @@ const AlbumsService = {
     return albums;
   },
 
-  getById: async (id: string) => {
+  getById: async (id: string, role: string) => {
     const album = await Album.aggregate([
       {
         $match: {
           _id: new mongoose.Types.ObjectId(id),
+          ...(role === 'admin' ? {} : { isPublished: true }),
         },
       },
       {
@@ -36,11 +37,12 @@ const AlbumsService = {
     return album[0];
   },
 
-  getArtistAlbums: async (artist_id: string) => {
+  getArtistAlbums: async (artist_id: string, role: string) => {
     const artistsAlbums = await Album.aggregate([
       {
         $match: {
           artist_id: new mongoose.Types.ObjectId(artist_id),
+          ...(role === 'admin' ? {} : { isPublished: true }),
         },
       },
       {

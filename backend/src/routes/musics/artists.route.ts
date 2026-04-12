@@ -9,7 +9,7 @@ const artistsRouter = Router();
 
 artistsRouter.get('/', optionalAuth, ArtistController.getAll);
 
-artistsRouter.get('/:id', ArtistController.getArtist);
+artistsRouter.get('/:id', optionalAuth, ArtistController.getArtist);
 
 artistsRouter.post(
   '/',

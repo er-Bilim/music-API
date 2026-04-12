@@ -18,8 +18,12 @@ const TrackController = {
     }
   },
 
-  getAlbumTracks: async (_req: Request, res: Response, album_id: string) => {
-    const albumTracks = await TracksService.getAlbumTracks(album_id);
+  getAlbumTracks: async (req: Request, res: Response, album_id: string) => {
+    const reqUser = req as RequestOptionalUser;
+
+    const role = reqUser.user?.role || 'guest';
+
+    const albumTracks = await TracksService.getAlbumTracks(album_id, role);
 
     if (albumTracks.length === 0) {
       return res.status(404).json({
@@ -31,13 +35,17 @@ const TrackController = {
   },
 
   getArtistTracks: async (
-    _req: Request,
+    req: Request,
     res: Response,
     next: NextFunction,
     artist_id: string,
   ) => {
     try {
-      const artistTracks = await TracksService.getArtistTracks(artist_id);
+      const reqUser = req as RequestOptionalUser;
+
+      const role = reqUser.user?.role || 'guest';
+
+      const artistTracks = await TracksService.getArtistTracks(artist_id, role);
 
       if (!artistTracks) {
         return res.status(404).json({

@@ -11,13 +11,19 @@ const TracksService = {
     return tracks;
   },
 
-  getAlbumTracks: async (album_id: string) => {
-    const albumTracks = await Track.find({ album_id }).select('-__v');
+  getAlbumTracks: async (album_id: string, role: string) => {
+    const albumTracks = await Track.find({
+      album_id,
+      ...(role === 'admin' ? {} : { isPublished: true }),
+    }).select('-__v');
     return albumTracks;
   },
 
-  getArtistTracks: async (artist_id: string) => {
-    const artistTracks = await Album.find({ artist_id });
+  getArtistTracks: async (artist_id: string, role: string) => {
+    const artistTracks = await Album.find({
+      artist_id,
+      ...(role === 'admin' ? {} : { isPublished: true }),
+    });
 
     if (artistTracks) {
       const album = artistTracks.at(0);
