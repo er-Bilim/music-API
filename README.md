@@ -2,64 +2,74 @@
 
 > ⚠️ **Educational Repository** – This project is built to master Full-stack development, Mongoose relationships, and secure API architecture.
 
-**Music API** is a robust backend service for a music cataloging application. It supports artists, albums, tracks, and personalized user listening history.
+**Music API** is a robust backend service for a music cataloging application. It supports artists, albums, tracks, and personalized user listening history with a focus on modern security and developer experience.
 
 ---
 
-## 🎯 Project Goals & Practice
+## 🎯 Key Features & Implementation
 
-- **Mongoose Mastery:** Complex schemas with `ref` relationships and `.populate()` logic.
-- **Clean Architecture:** Strict separation between Routes, Controllers, and Services.
-- **Advanced Routing:** Implementation of nested resource filtering via Query Params (e.g., `?artist=ID` or `?album=ID`).
-- **Security & Auth:** Password hashing with **Argon2** and session-based access via custom `auth` middleware.
-- **File Handling:** Image processing and uploads using **Multer**.
+- **Mongoose Mastery:** Complex schemas with `ref` relationships and efficient `.populate()` logic.
+- **Secure Authentication:** Implementation of **HTTP-only Cookies** for session management, significantly reducing XSS attack surfaces compared to LocalStorage.
+- **Social Auth Integration:** Support for **Google OAuth 2.0** and secondary providers (GitHub/LinkedIn), allowing seamless user onboarding.
+- **Rich User Profiles:** Support for custom `displayNames` and `avatars` (via Multer uploads or social profile sync).
+- **Clean Architecture:** Strict separation between Routes, Controllers, and Services with global error handling.
 
 ## 🛠 Tech Stack
 
 - **Runtime:** Node.js with Express
 - **Language:** TypeScript
 - **Database:** MongoDB (Mongoose)
-- **Auth:** JWT / Argon2
-- **Files:** Multer (for Artist/Album covers)
+- **Auth:** Argon2, **HTTP-only Cookies**, Passport.js (OAuth 2.0)
+- **Files:** Multer (for Artist/Album covers and User avatars)
+- **Infrastructure:** ESLint, Prettier, **Husky** (Git Hooks)
 
-## 📡 API Documentation (Endpoints)
+## 📡 API Documentation
 
 All routes are prefixed with `/api`.
 
 ### 👤 Users & Auth
-- `POST /users` — Register a new user.
-- `POST /users/sessions` — Login and receive a session token.
+- `POST /users` — Register a new user (Requires `email`, `password`, `displayName`, and optional `avatar`).
+- `POST /users/sessions` — Standard login. Sets a secure **HTTP-only Cookie**.
+- `DELETE /users/sessions` — Logout. Clears the session cookie.
+- `GET /users/google` — Initiation of Google OAuth flow.
+- `GET /users/github` — Initiation of GitHub OAuth flow.
 
 ### 🎸 Artists
-- `GET /artists` — Get all artists.
-- `GET /artists/:id` — Get detailed info about a specific artist.
-- `POST /artists` — Create a new artist (Supports image upload).
+- `GET /artists` — Fetch all artists.
+- `POST /artists` — Create an artist (Supports image upload).
 
 ### 💿 Albums
-- `GET /albums` — Get all albums.
-- `GET /albums?artist={ID}` — Get all albums by a specific artist.
-- `GET /albums/:album_id` — Get specific album details.
-- `POST /albums` — Create an album (Supports image upload, linked to Artist).
+- `GET /albums?artist={ID}` — Fetch albums filtered by artist.
+- `POST /albums` — Create an album (Linked to Artist, supports cover upload).
 
 ### 🎵 Tracks
-- `GET /tracks` — Get all tracks.
-- `GET /tracks?album={ID}` — Get tracks from a specific album.
-- `GET /tracks?artist={ID}` — Get all tracks by a specific artist.
-- `POST /tracks` — Create a new track.
+- `GET /tracks?album={ID}` — Fetch tracks from a specific album.
+- `POST /tracks` — Add a new track.
 
 ### 📜 Track History (Protected)
-*Requires `Authorization` header with a valid user token.*
+*Access requires a valid session cookie.*
 - `GET /track_history` — View personal listening history (Sorted by date DESC).
-- `POST /track_history` — Add a track to history (Triggered on play).
+- `POST /track_history` — Log a track play event.
 
-## 🏗 Best Practices Implemented
+---
 
-- **Controller Logic:** All controllers are wrapped in `try/catch` with standardized HTTP status codes (`201`, `400`, `404`, `500`).
-- **Middleware:** - `auth`: Protects private routes and identifies the user via token.
-    - `multer`: Handles `multipart/form-data` for seamless image uploads.
-- **Query Structure:** Efficient data fetching using Mongoose queries for dynamic filtering.
+## 🛠 Developer Experience & Quality Control
+
+To ensure high code standards, this project utilizes:
+- **Linting & Formatting:** ESLint and Prettier are configured for both Frontend and Backend.
+- **Automated Checks:** **Husky** pre-commit hooks are active.
+- **Validation:** Every commit automatically triggers
+
+---
 
 ## 🚀 Installation & Launch
+
+### 1. Environment Configuration
+Create a `.env` file in the `backend` directory:
+
+```env
+
+```
 
 ### 1. Run Backend (API)
 
