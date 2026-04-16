@@ -307,6 +307,8 @@ const run = async () => {
       isPublished: false,
     },
   ]);
+
+  await mongoose.disconnect();
 };
 
 run().catch((error) => console.error(error));
