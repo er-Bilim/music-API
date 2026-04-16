@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import argon2 from 'argon2';
 import type { UserMethods } from './userModel.types.ts';
 import config from '../../config.ts';
+import regex from './regex/regex.ts';
 
 type UserModel = Model<IUser, {}, UserMethods>;
 
@@ -12,6 +13,25 @@ const UserSchema = new Schema<HydratedDocument<IUser>, UserModel, UserMethods>({
     type: String,
     required: true,
     unique: true,
+    validate: {
+      validator: (value: string) => {
+        return regex.username.test(value);
+      },
+    },
+  },
+  displayName: {
+    type: String,
+    required: true,
+    validate: {
+      validator: (value: string) => {
+        return regex.displayName.test(value);
+      },
+    },
+  },
+  avatar: {
+    type: String,
+    required: false,
+    default: null,
   },
   password: {
     type: String,
@@ -24,6 +44,9 @@ const UserSchema = new Schema<HydratedDocument<IUser>, UserModel, UserMethods>({
     type: String,
     enum: ['user', 'admin'],
     default: 'user',
+  },
+  googleID: {
+    type: String,
   },
 });
 
