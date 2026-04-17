@@ -31,27 +31,32 @@ const UsersController = {
     }
   },
   googleAuth: async (req: Request, res: Response, next: NextFunction) => {
-    const credential: string = req.body.credential;
-    if (!credential) {
-      res.status(403).json({
-        message: 'Credential not found',
-      });
-    }
-    const data = await UsersService.googleAuth(credential);
+    try {
+      const credential: string = req.body.credential;
+      if (!credential) {
+        res.status(403).json({
+          message: 'Credential not found',
+        });
+      }
 
-    if (!data) {
-      return res.status(400).json({
-        message: 'Google login error',
-      });
-    }
+      const data = await UsersService.googleAuth(credential);
 
-    setCookieToken(res, data.token);
-    res.send({
-      message: data.isNewUser
-        ? 'Registration successful'
-        : 'Authentication successful',
-      user: data.user,
-    });
+      if (!data) {
+        return res.status(400).json({
+          message: 'Google login error',
+        });
+      }
+
+      setCookieToken(res, data.token);
+      res.send({
+        message: data.isNewUser
+          ? 'Registration successful'
+          : 'Authentication successful',
+        user: data.user,
+      });
+    } catch (error) {
+      next(error);
+    }
   },
 
   authentication: async (req: Request, res: Response, next: NextFunction) => {

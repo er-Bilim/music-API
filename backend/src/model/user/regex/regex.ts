@@ -1,5 +1,5 @@
 export const regex = {
-  username: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/,
+  username: /^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$/,
   displayName: /^[a-zA-Z\s]*$/,
 };
 

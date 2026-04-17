@@ -11,7 +11,11 @@ usersRouter.post(
   UsersController.registration,
 );
 
-usersRouter.post('/google', UsersController.googleAuth);
+usersRouter.post(
+  '/google',
+  imagesUpload.single('avatar'),
+  UsersController.googleAuth,
+);
 
 usersRouter.post('/sessions', UsersController.authentication);
 

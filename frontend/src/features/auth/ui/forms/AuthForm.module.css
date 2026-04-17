@@ -66,3 +66,18 @@
   font-size: var(--font-size-sm);
   padding-left: var(--space-sm);
 }
+
+.form_input_content_avatar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.form_input_file {
+  width: 100px;
+  height: 100px;
+  border-radius: var(--circular);
+  background: var(--pink-500);
+  border: 1px solid var(--pink-500);
+  overflow: hidden;
+}

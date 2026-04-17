@@ -13,11 +13,6 @@ const UserSchema = new Schema<HydratedDocument<IUser>, UserModel, UserMethods>({
     type: String,
     required: true,
     unique: true,
-    // validate: {
-    //   validator: (value: string) => {
-    //     return regex.username.test(value);
-    //   },
-    // },
   },
   displayName: {
     type: String,

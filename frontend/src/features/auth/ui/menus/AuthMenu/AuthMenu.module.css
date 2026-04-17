@@ -14,10 +14,10 @@
 
 .user_menu_content {
   width: 350px;
+  align-items: center;
   display: flex;
   flex-direction: row;
   gap: var(--space-md);
-  background: var(--grey-900);
 }
 
 .user_info {
@@ -32,6 +32,7 @@
 .logout_button {
   display: flex;
   width: 150px;
+  height: 37px;
   cursor: pointer;
   font-size: var(--font-size-md);
   padding: var(--space-sm) var(--space-md);
@@ -40,4 +41,18 @@
   border: 1px solid var(--grey-900);
   align-items: center;
   justify-content: center;
+}
+
+.user_avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--circular);
+  background: var(--pink-500);
+  border: 1px solid var(--pink-500);
+  overflow: hidden;
+}
+
+.user_displayname {
+  font-size: var(--font-size-md);
+  color: var(--grey-900);
 }

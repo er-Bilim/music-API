@@ -12,6 +12,8 @@ export interface IUser {
 export interface IRegister {
   username: string;
   password: string;
+  displayName: string;
+  image?: File | null;
 }
 
 export interface ILogin {

@@ -29,8 +29,12 @@ const AuthMenu = () => {
               logout
             </LinkMotion>
             <div className={classes.user_info}>
-              <UserAvatar avatar={user.user.avatar} />
-              <UserName username={user.user.displayName} />
+              <div className={classes.user_avatar}>
+                <UserAvatar avatar={user.user.avatar} />
+              </div>
+              <div className={classes.user_displayname}>
+                <UserName username={user.user.displayName} />
+              </div>
             </div>
           </div>
         </div>

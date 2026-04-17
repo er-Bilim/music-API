@@ -3,6 +3,10 @@ import User from '../../model/user/User.ts';
 import type { IUser, IUserReg, IUserSave } from '../../types/user.types.ts';
 import { OAuth2Client } from 'google-auth-library';
 import config from '../../config.ts';
+import { randomUUID } from 'node:crypto';
+import path from 'path';
+import fs from 'fs/promises';
+import axios from 'axios';
 
 const UsersService = {
   registration: async (data: IUserReg): Promise<IUserSave> => {
@@ -60,25 +64,43 @@ const UsersService = {
       email: username,
       sub: googleID,
       given_name: displayName,
-      picture: avatar,
+      picture: avatarGoogle,
     } = payload;
 
     let user = await User.findOne({ googleID });
     let isNewUser: boolean = false;
 
     if (!user) {
-      const generatePassword = crypto.randomUUID();
+      isNewUser = true;
+      let savedAvatar = '';
+
+      if (avatarGoogle) {
+        try {
+          const fileName = `${randomUUID()}.jpg`;
+          const destDir = path.join(config.publicPath, 'images');
+          const fullPath = path.join(destDir, fileName);
+          await fs.mkdir(destDir, { recursive: true });
+
+          const response = await axios.get(avatarGoogle, {
+            responseType: 'arraybuffer',
+          });
+          await fs.writeFile(fullPath, response.data);
+
+          savedAvatar = `/images/${fileName}`;
+        } catch (error) {
+          console.error(error);
+        }
+      }
 
       user = new User({
         username,
-        password: generatePassword,
+        password: crypto.randomUUID(),
         googleID,
         displayName,
-        avatar,
+        avatar: savedAvatar,
       });
 
       await user.save();
-      isNewUser = true;
     }
 
     const token = user.generateAuthToken();

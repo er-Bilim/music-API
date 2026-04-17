@@ -1,5 +1,4 @@
 import classes from '../AuthForm.module.css';
-import z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { IRegister } from '../../../../../entities/user/model/user.types';
@@ -9,25 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUp } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import LoginGoogleButton from '../../loginGoogle/ui/loginGoogleButton/LoginGoogleButton';
-
-const schemaRegister = z.object({
-  username: z
-    .string()
-    .trim()
-    .min(3, { message: 'Username must be at least 3 characters long!' })
-    .max(25, { message: 'Username must be at most 25 characters long!' })
-    .regex(
-      /^[a-zA-Z0-9]+$/,
-      'Your username must contain only letters and numbers!',
-    ),
-  password: z
-    .string()
-    .trim()
-    .min(8, { message: 'Password must be at least 8 characters long!' })
-    .max(32, { message: 'Password must be at most 32 characters long!' }),
-});
-
-type RegisterFormData = z.infer<typeof schemaRegister>;
+import { schemaRegister, type RegisterFormData } from './lib/validation';
+import type { ChangeEvent } from 'react';
+import FileInput from '../../../../../shared/ui/FileInput/FileInput';
 
 const RegisterForm = () => {
   const navigate = useNavigate();
@@ -37,6 +20,7 @@ const RegisterForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<RegisterFormData>({
     resolver: zodResolver(schemaRegister),
   });
@@ -46,6 +30,14 @@ const RegisterForm = () => {
       await registerUser(data).then(() => navigate('/'));
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const onChangeFileHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, files } = event.target;
+
+    if (files && files[0] && name === 'image') {
+      setValue(name, files[0]);
     }
   };
 
@@ -60,6 +52,42 @@ const RegisterForm = () => {
         </div>
         <form onSubmit={handleSubmit(registerSubmit)}>
           <div className={classes.form_inputs_block}>
+            <div
+              className={`${classes.form_input_content} ${classes.form_input_content_avatar}`}
+            >
+              <label htmlFor="avatar" className={classes.form_input_label}>
+                Avatar
+              </label>
+              <div className={classes.form_input_file}>
+                <FileInput
+                  label="Artist Photo"
+                  {...register('image')}
+                  onChange={onChangeFileHandler}
+                />
+                {errors.image && (
+                  <p className={classes.form_input_error}>
+                    {errors.image.message}
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className={classes.form_input_content}>
+              <label htmlFor="displayname" className={classes.form_}>
+                Display name
+              </label>
+              <input
+                id="displayname"
+                className={classes.form_input}
+                type="text"
+                {...register('displayName')}
+                placeholder="Display name"
+              />
+              {errors.displayName && (
+                <p className={classes.form_input_error}>
+                  {errors.displayName.message}
+                </p>
+              )}
+            </div>
             <div className={classes.form_input_content}>
               <label htmlFor="username" className={classes.form_}>
                 Username

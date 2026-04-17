@@ -29,6 +29,7 @@ body {
 
 html {
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 a {
@@ -61,5 +62,5 @@ ul {
 
 ::selection {
   background-color: var(--pink-500);
-  color: var(--grey-50)
+  color: var(--grey-50);
 }
