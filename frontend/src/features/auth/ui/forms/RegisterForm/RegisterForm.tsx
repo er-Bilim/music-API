@@ -8,6 +8,7 @@ import Title from '../../../../../shared/ui/Title/Title';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUp } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import LoginGoogleButton from '../../loginGoogle/ui/loginGoogleButton/LoginGoogleButton';
 
 const schemaRegister = z.object({
   username: z
@@ -101,6 +102,8 @@ const RegisterForm = () => {
             >
               sign up
             </button>
+
+            <LoginGoogleButton type={'signup_with'} />
           </div>
         </form>
       </div>

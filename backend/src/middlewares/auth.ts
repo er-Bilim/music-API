@@ -13,7 +13,7 @@ const auth = async (expressReq: Request, res: Response, next: NextFunction) => {
   try {
     const req = expressReq as RequestWithUser;
     const token = req.cookies.token;
-    
+
     if (!token) {
       return res.status(401).json({
         error: 'Access denied. No token provided',
@@ -21,8 +21,8 @@ const auth = async (expressReq: Request, res: Response, next: NextFunction) => {
     }
 
     const decoded = jwt.verify(token, config.jwtSecret) as { _id: string };
-    
-    const user = await User.findOne({ _id: decoded._id, token });
+
+    const user = await User.findOne({ _id: decoded._id });
 
     if (!user) {
       return res.status(403).json({

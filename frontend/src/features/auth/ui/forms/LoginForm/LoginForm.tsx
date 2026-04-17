@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleDown } from '@fortawesome/free-solid-svg-icons';
 import Alert from '../../../../../shared/ui/Alert/Alert';
 import { useNavigate } from 'react-router-dom';
+import LoginGoogleButton from '../../loginGoogle/ui/loginGoogleButton/LoginGoogleButton';
 
 const schemaLogin = z.object({
   username: z
@@ -109,6 +110,7 @@ const LoginForm = () => {
             >
               sign in
             </button>
+            <LoginGoogleButton type="signin_with" />
           </div>
         </form>
       </div>

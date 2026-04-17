@@ -1,6 +1,8 @@
 import type { HydratedDocument } from 'mongoose';
 import User from '../../model/user/User.ts';
 import type { IUser, IUserReg, IUserSave } from '../../types/user.types.ts';
+import { OAuth2Client } from 'google-auth-library';
+import config from '../../config.ts';
 
 const UsersService = {
   registration: async (data: IUserReg): Promise<IUserSave> => {
@@ -40,9 +42,49 @@ const UsersService = {
     return user;
   },
 
-  // getRole: async (user: IUser): Promise<void> => {
-  //   const 
-  // }
+  googleAuth: async (
+    credential: string,
+  ): Promise<{ user: IUser; token: string; isNewUser: boolean } | null> => {
+    const client = new OAuth2Client(config.clientID);
+
+    const ticket = await client.verifyIdToken({
+      idToken: credential,
+      audience: config.clientID,
+    });
+
+    const payload = ticket.getPayload();
+
+    if (!payload) return null;
+
+    const {
+      email: username,
+      sub: googleID,
+      given_name: displayName,
+      picture: avatar,
+    } = payload;
+
+    let user = await User.findOne({ googleID });
+    let isNewUser: boolean = false;
+
+    if (!user) {
+      const generatePassword = crypto.randomUUID();
+
+      user = new User({
+        username,
+        password: generatePassword,
+        googleID,
+        displayName,
+        avatar,
+      });
+
+      await user.save();
+      isNewUser = true;
+    }
+
+    const token = user.generateAuthToken();
+
+    return { user, token, isNewUser };
+  },
 };
 
 export default UsersService;

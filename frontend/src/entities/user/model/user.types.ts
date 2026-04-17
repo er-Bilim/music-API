@@ -2,6 +2,8 @@ export interface IUser {
   message: string;
   user: {
     username: string;
+    displayName: string;
+    avatar: string;
     token: string;
     role: string;
   };

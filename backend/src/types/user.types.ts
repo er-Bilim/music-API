@@ -9,4 +9,4 @@ export interface IUser {
 }
 
 export type IUserSave = Omit<IUser, 'role'>;
-export type IUserReg = Omit<IUser, 'role' | 'token'>;
+export type IUserReg = Omit<IUser, 'role' | 'token' | 'googleID'>;

@@ -26,16 +26,19 @@ const run = async () => {
   const [admin, polskyBobr, cheeseNagibator] = await User.create([
     {
       username: 'admin',
+      displayName: 'Admin',
       password: 'admin123',
       role: 'admin',
     },
     {
       username: 'polskyBobr',
+      displayName: 'polskyBobr',
       password: 'polskyBobr12345',
       role: 'user',
     },
     {
       username: 'cheeseNagibator',
+      displayName: 'cheeseNagibator',
       password: 'cheeseNagibator12345',
       role: 'user',
     },

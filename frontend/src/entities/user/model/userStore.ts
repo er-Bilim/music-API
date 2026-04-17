@@ -5,13 +5,20 @@ import type {
 } from '../../../shared/types/error.types';
 import type { ILogin, IRegister, IUser } from './user.types';
 import { createJSONStorage, devtools, persist } from 'zustand/middleware';
-import { login, logout, register } from '../service/user.service';
+import {
+  login,
+  loginGoogleService,
+  logout,
+  register,
+} from '../service/user.service';
 import { parseApiError } from '../../../shared/api/error/normalizeResError';
 
 interface IUserState {
   user: IUser | null;
   registerUser: (data: IRegister) => Promise<void>;
   loginUser: (data: ILogin) => Promise<void>;
+  loginGoogle: (credential: string) => Promise<void>;
+
   logoutUser: () => Promise<void>;
   registerLoading: boolean;
   registerError: IValidationError | null;
@@ -53,6 +60,22 @@ export const useUserStore = create<IUserState>()(
           try {
             const user = await login(data);
             set({ user, loginLoading: false });
+          } catch (error) {
+            set({
+              loginLoading: false,
+              loginError: parseApiError(error as IGlobalError),
+            });
+
+            throw error;
+          }
+        },
+
+        loginGoogle: async (credential) => {
+          set({ loginLoading: true, loginError: null });
+
+          try {
+            const user = await loginGoogleService(credential);
+            set({ loginLoading: false, user: user });
           } catch (error) {
             set({
               loginLoading: false,

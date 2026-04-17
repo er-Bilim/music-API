@@ -13,11 +13,11 @@ const UserSchema = new Schema<HydratedDocument<IUser>, UserModel, UserMethods>({
     type: String,
     required: true,
     unique: true,
-    validate: {
-      validator: (value: string) => {
-        return regex.username.test(value);
-      },
-    },
+    // validate: {
+    //   validator: (value: string) => {
+    //     return regex.username.test(value);
+    //   },
+    // },
   },
   displayName: {
     type: String,
@@ -72,10 +72,12 @@ UserSchema.methods.checkPassword = function (password) {
 
 UserSchema.methods.generateAuthToken = function () {
   const token = jwt.sign({ _id: this._id }, config.jwtSecret, {
-    expiresIn: '30d',
+    expiresIn: '1h',
   });
 
   this.token = token;
+
+  return token
 };
 
 const User = model('User', UserSchema);

@@ -8,7 +8,7 @@ interface IUserAvatarProps {
 const UserAvatar: FC<IUserAvatarProps> = ({ avatar }) => {
   return (
     <div className={classes.avatar_block}>
-      <p className={classes.avatar}>{avatar.at(0)}</p>
+      <img src={`${avatar}`} alt={'your avatar'} className={classes.avatar} />
     </div>
   );
 };

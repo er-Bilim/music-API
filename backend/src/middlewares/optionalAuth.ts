@@ -20,7 +20,7 @@ const optionalAuth = async (
   if (token) {
     try {
       const decoded = jwt.verify(token, config.jwtSecret) as { _id: string };
-      const user = await User.findOne({ _id: decoded._id, token });
+      const user = await User.findOne({ _id: decoded._id });
 
       if (!user) {
         return res.status(403).json({

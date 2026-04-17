@@ -11,7 +11,9 @@ const UsersController = {
 
     const correctUserData: IUserReg = {
       username: body.username,
+      displayName: body.displayName,
       password: body.password,
+      avatar: req.file ? `images/${req.file.filename}` : null,
     };
 
     try {
@@ -27,6 +29,29 @@ const UsersController = {
 
       next(error);
     }
+  },
+  googleAuth: async (req: Request, res: Response, next: NextFunction) => {
+    const credential: string = req.body.credential;
+    if (!credential) {
+      res.status(403).json({
+        message: 'Credential not found',
+      });
+    }
+    const data = await UsersService.googleAuth(credential);
+
+    if (!data) {
+      return res.status(400).json({
+        message: 'Google login error',
+      });
+    }
+
+    setCookieToken(res, data.token);
+    res.send({
+      message: data.isNewUser
+        ? 'Registration successful'
+        : 'Authentication successful',
+      user: data.user,
+    });
   },
 
   authentication: async (req: Request, res: Response, next: NextFunction) => {

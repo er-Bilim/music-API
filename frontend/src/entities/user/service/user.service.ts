@@ -16,6 +16,12 @@ export const login = async (data: ILogin): Promise<IUser> => {
   return userData;
 };
 
+export const loginGoogleService = async (credential: string) => {
+  const response = await axiosApi.post('/users/google', { credential });
+  const data = response.data;
+  return data;
+};
+
 export const logout = async (): Promise<void> => {
   const response = await axiosApi.delete('/users/sessions');
   toast.success(response.data.message);
